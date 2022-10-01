@@ -1,25 +1,27 @@
-import { Text, TouchableHighlight } from 'react-native';
+import {
+  Text,
+  TouchableHighlight,
+  TouchableHighlightProps,
+} from 'react-native';
 
-type AppButtonProps = {
+interface Props extends TouchableHighlightProps {
   title: string;
-  bgColor: string;
-  tintColor: string;
-  onPress: () => void;
-};
+  color: string;
+}
 
-const AppButton: React.FC<AppButtonProps> = ({
+const AppButton: React.FC<Props> = ({
   title,
-  bgColor,
-  tintColor,
+  color,
   onPress,
+  ...otherProps
 }) => {
   return (
     <TouchableHighlight
-      className={`${bgColor} rounded-md p-3.5 m-2`}
-      underlayColor={tintColor}
+      className={`bg-medium rounded-md p-3.5 m-2 ${color}`}
       onPress={onPress}
+      {...otherProps}
     >
-      <Text className="text-light text-center text-xl font-bold uppercase">
+      <Text className="text-light text-center text-lg font-bold uppercase">
         {title}
       </Text>
     </TouchableHighlight>
