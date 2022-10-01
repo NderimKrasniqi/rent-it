@@ -7,6 +7,7 @@ import {
 interface Props extends TouchableHighlightProps {
   title: string;
   color: string;
+  onPress: () => void;
 }
 
 const AppButton: React.FC<Props> = ({
@@ -17,7 +18,7 @@ const AppButton: React.FC<Props> = ({
 }) => {
   return (
     <TouchableHighlight
-      className={`bg-medium rounded-md p-3.5 m-2 ${color}`}
+      className={`bg-medium w-full rounded-md p-3.5 my-2 ${color}`}
       onPress={onPress}
       {...otherProps}
     >

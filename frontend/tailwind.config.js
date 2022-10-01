@@ -2,12 +2,6 @@
 module.exports = {
   content: ['./App.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    fontSize: {
-      sm: ['14px', '20px'],
-      base: ['16px', '24px'],
-      lg: ['20px'],
-      xl: ['24px', '32px'],
-    },
     extend: {
       colors: {
         light: '#f8f4f4',
