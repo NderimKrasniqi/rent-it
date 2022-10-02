@@ -22,13 +22,13 @@ const WelcomeScreen: React.FC<Props> = ({ navigation }) => {
       <View className="w-full px-10 mb-24">
         <AppButton
           title="Login"
-          color={colors.primaryBg}
+          color="bg-primary-500"
           underlayColor={colors.primaryTint}
           onPress={() => navigation.navigate('LoginScreen')}
         />
         <AppButton
           title="Register"
-          color={colors.secondaryBg}
+          color="bg-secondary-900"
           underlayColor={colors.secondaryTint}
           onPress={() => navigation.navigate('RegisterScreen')}
         />

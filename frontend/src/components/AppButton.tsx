@@ -4,22 +4,15 @@ import {
   TouchableHighlightProps,
 } from 'react-native';
 
-interface Props extends TouchableHighlightProps {
+interface ButtonProps extends TouchableHighlightProps {
   title: string;
-  color: string;
-  onPress: () => void;
+  color: 'bg-primary-500' | 'bg-secondary-900';
 }
 
-const AppButton: React.FC<Props> = ({
-  title,
-  color,
-  onPress,
-  ...otherProps
-}) => {
+const AppButton: React.FC<ButtonProps> = ({ title, color, ...otherProps }) => {
   return (
     <TouchableHighlight
       className={`bg-medium w-full rounded-md p-3.5 my-2 ${color}`}
-      onPress={onPress}
       {...otherProps}
     >
       <Text className="text-light text-center text-lg font-bold uppercase">

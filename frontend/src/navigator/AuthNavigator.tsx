@@ -6,6 +6,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 
 const Stack = createStackNavigator();
+
 export type StackParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;

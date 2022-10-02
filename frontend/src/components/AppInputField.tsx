@@ -1,36 +1,60 @@
 import { View, TextInput, TextInputProps } from 'react-native';
+import { Controller, Control, RegisterOptions } from 'react-hook-form';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../utils/colors';
+import AppErrorMessage from './AppErrorMessage';
 
-interface Props extends TextInputProps {
+interface InputFieldProps extends TextInputProps {
   icon?: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
+  name: string;
+  control: Control;
+  rules: RegisterOptions;
 }
 
-const AppInputField: React.FC<Props> = ({
+const AppInputField: React.FC<InputFieldProps> = ({
   icon,
-  onChangeText,
-  value,
+  control,
+  name,
+  rules,
   ...otherProps
 }) => {
   return (
-    <View className="bg-gray-100 flex flex-row items-center w-full rounded-md my-2.5 p-3">
-      {icon && (
-        <View className="mr-2.5">
-          <MaterialCommunityIcons
-            name={icon}
-            size={20}
-            color={colors.primaryTint}
-          />
-        </View>
+    <Controller
+      control={control}
+      name={name}
+      rules={rules}
+      render={({
+        field: { value, onChange, onBlur },
+        fieldState: { error },
+      }) => (
+        <>
+          <View
+            className={`${
+              error ? 'bg-red-100' : 'bg-gray-100'
+            } flex flex-row items-center w-full rounded-md my-2.5 p-3`}
+          >
+            {icon && (
+              <View className="mr-2.5">
+                <MaterialCommunityIcons
+                  name={icon}
+                  size={20}
+                  color={colors.primaryTint}
+                />
+              </View>
+            )}
+            <TextInput
+              className="flex-1 text-lg text-dark"
+              value={value}
+              placeholderTextColor={colors.medium}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              {...otherProps}
+            />
+          </View>
+          <AppErrorMessage error={error} />
+        </>
       )}
-      <TextInput
-        placeholderTextColor={colors.medium}
-        className="flex-1 text-lg text-dark"
-        onChangeText={onChangeText}
-        value={value}
-        {...otherProps}
-      />
-    </View>
+    />
   );
 };
 
