@@ -1,21 +1,32 @@
 import { View, Text } from 'react-native';
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useContext } from 'react';
+import { FieldValues, useForm } from 'react-hook-form';
+import authApi from '../api/auth';
 import colors from '../utils/colors';
+import AuthContext from '../auth/context';
 import AppButton from './AppButton';
 import AppInputField from './AppInputField';
+import jwtDecode from 'jwt-decode';
 
 const AppLoginForm = () => {
+  const { setUser } = useContext(AuthContext);
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  console.log('ERRORS: ', errors);
-  const OnLoginPressed = (data: object) => {
-    console.log(data);
+  const OnLoginPressed = async (data: FieldValues) => {
+    const { email, password } = data;
+    try {
+      const { data } = await authApi.login(email, password);
+      const user = jwtDecode(data);
+      setUser(user);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <>
       <View className="w-full">
@@ -51,7 +62,7 @@ const AppLoginForm = () => {
             },
           }}
         />
-        <Text className="text-right text-xs text-blue-500 font-semibold mb-4">
+        <Text className="text-right text-xs text-blue-500 font-semibold my-2">
           Forgot password?
         </Text>
       </View>
