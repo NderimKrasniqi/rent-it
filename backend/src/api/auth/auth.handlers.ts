@@ -18,12 +18,7 @@ const register = async (req: Request, res: Response) => {
 
   const token = createToken(user);
 
-  const options = {
-    expires: new Date(Date.now() + 12 * 60 * 60 * 1000),
-    httpOnly: true,
-  };
-
-  return res.status(201).cookie('access-token', token, options).send(user);
+  return res.status(201).json(token);
 };
 
 const login = async (req: Request, res: Response) => {
@@ -42,12 +37,8 @@ const login = async (req: Request, res: Response) => {
   }
 
   const token = createToken(exists);
-  const options = {
-    expires: new Date(Date.now() + 12 * 60 * 60 * 1000),
-    httpOnly: true,
-  };
 
-  return res.status(201).cookie('access-token', token, options).send(exists);
+  return res.status(200).json(token);
 };
 
 export { login, register };
