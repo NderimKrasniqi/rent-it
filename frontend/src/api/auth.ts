@@ -1,6 +1,20 @@
 import client from './client';
 
-const login = (email: string, password: string) =>
-  client.post('/login', { email, password });
+interface ILoginResponse {
+  token: string;
+}
 
-export default { login };
+export interface IUser {
+  avatar?: string;
+  name?: string;
+  email: string;
+  password: string;
+}
+
+const login = (userInput: IUser) =>
+  client.post<ILoginResponse>('auth/login', userInput);
+
+const register = () => {
+  client.post('auth/register');
+};
+export default { login, register };

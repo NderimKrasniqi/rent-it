@@ -21,11 +21,9 @@
   "homepage": "https://github.com/NderimKrasniqi/express-ts-starter#readme",
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
-    "@types/cookie-parser": "^1.4.3",
     "@types/jsonwebtoken": "^8.5.9",
     "bcrypt": "^5.0.1",
     "colors": "^1.4.0",
-    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",

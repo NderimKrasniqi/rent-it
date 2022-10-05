@@ -2,7 +2,7 @@ import { View, TextInput, TextInputProps } from 'react-native';
 import { Controller, Control, RegisterOptions } from 'react-hook-form';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../utils/colors';
-import AppErrorMessage from './AppErrorMessage';
+import AppInputErrorMessage from './AppInputErrorMessage';
 
 interface InputFieldProps extends TextInputProps {
   icon?: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
@@ -43,7 +43,7 @@ const AppInputField: React.FC<InputFieldProps> = ({
               </View>
             )}
             <TextInput
-              className="flex-1 text-lg text-dark"
+              className="h-8 flex-1 text-lg text-dark"
               value={value}
               placeholderTextColor={colors.medium}
               onChangeText={onChange}
@@ -51,7 +51,7 @@ const AppInputField: React.FC<InputFieldProps> = ({
               {...otherProps}
             />
           </View>
-          <AppErrorMessage error={error} />
+          <AppInputErrorMessage error={error} />
         </>
       )}
     />

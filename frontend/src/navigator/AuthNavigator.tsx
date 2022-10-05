@@ -1,9 +1,9 @@
 import { useWindowDimensions } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import LoginScreen from '../screens/LoginScreen';
-import RegisterScreen from '../screens/RegisterScreen';
-import WelcomeScreen from '../screens/WelcomeScreen';
+import LoginScreen from '../screens/auth-screens/LoginScreen';
+import RegisterScreen from '../screens/auth-screens/RegisterScreen';
+import WelcomeScreen from '../screens/auth-screens/WelcomeScreen';
 
 const Stack = createStackNavigator();
 
@@ -12,6 +12,7 @@ export type StackParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
 };
+
 const AuthNavigator = () => {
   const { width } = useWindowDimensions();
   return (

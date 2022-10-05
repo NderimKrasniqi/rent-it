@@ -4,7 +4,7 @@ import { createHash } from '../../utils/hash';
 
 // An interface that describes the properties
 // that a User Document has
-interface UserDocument extends Document {
+interface IUserDocument extends Document {
   avatar?: string;
   name?: string;
   email: string;
@@ -12,11 +12,11 @@ interface UserDocument extends Document {
 }
 // An interface that describes the properties
 // that a User Model has
-interface UserModel extends Model<UserDocument> {
-  insertOne(properties: UserInput): UserDocument;
+interface UserModel extends Model<IUserDocument> {
+  insertOne(properties: UserInput): IUserDocument;
 }
 
-const userSchema = new Schema(
+const userSchema = new Schema<IUserDocument>(
   {
     avatar: { type: String },
     name: { type: String },
@@ -51,6 +51,6 @@ userSchema.pre('save', async function (next) {
 });
 userSchema.statics.insertOne = (properties: UserInput) => new User(properties);
 
-const User = model<UserDocument, UserModel>('User', userSchema);
+const User = model<IUserDocument, UserModel>('User', userSchema);
 
-export { User, UserInput, UserDocument };
+export { User, UserInput, IUserDocument };

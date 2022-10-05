@@ -2,7 +2,6 @@ import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
-import cookieParser from 'cookie-parser';
 import colors from 'colors';
 import * as dotenv from 'dotenv';
 import 'express-async-errors';
@@ -20,7 +19,6 @@ app.use(helmet());
 app.disable('x-powered-by');
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/healthcheck', (req, res) => {

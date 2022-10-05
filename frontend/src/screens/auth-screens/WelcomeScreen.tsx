@@ -1,10 +1,10 @@
-import { ImageBackground, View, Text } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 import React from 'react';
-import AppButton from '../components/AppButton';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { StackParamList } from '../navigator/AuthNavigator';
-import colors from '../utils/colors';
-import AppLogo from '../components/AppLogo';
+import { StackParamList } from '../../navigator/AuthNavigator';
+import colors from '../../utils/colors';
+import AppLogo from '../../components/AppLogo';
+import AppButton from '../../components/AppButton';
 
 type Props = {
   navigation: StackNavigationProp<StackParamList, 'WelcomeScreen'>;
@@ -13,7 +13,7 @@ type Props = {
 const WelcomeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <ImageBackground
-      source={require('../assets/welcome.jpg')}
+      source={require('../../assets/welcome.jpg')}
       resizeMode="cover"
       className="flex-1 justify-between items-center"
     >

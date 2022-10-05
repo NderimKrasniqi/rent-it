@@ -1,40 +1,56 @@
 import { View, Text } from 'react-native';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import AppLoginText from '../../components/AppLoginText';
 import { FieldValues, useForm } from 'react-hook-form';
-import authApi from '../api/auth';
-import colors from '../utils/colors';
-import AuthContext from '../auth/context';
-import AppButton from './AppButton';
-import AppInputField from './AppInputField';
-import jwtDecode from 'jwt-decode';
+import AuthContext from '../../auth/context';
+import jwtDecode, { JwtPayload } from 'jwt-decode';
+import AppInputField from '../../components/AppInputField';
+import AppButton from '../../components/AppButton';
+import authApi from '../../api/auth';
+import colors from '../../utils/colors';
+import { isAxiosError } from '../../utils/axios-errors';
+import { IErrorResponse } from '../../interfaces/IErrorResponse';
+import AppErrorMessage from '../../components/AppErrorMessage';
+import axios, { AxiosError } from 'axios';
 
-const AppLoginForm = () => {
+const LoginScreen: React.FC = () => {
+  const [error, setError] = useState<{ message: string }[]>();
+  const [show, setShow] = useState(false);
+
+  const { control, handleSubmit } = useForm();
   const { setUser } = useContext(AuthContext);
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
   const OnLoginPressed = async (data: FieldValues) => {
+    setShow(false);
     const { email, password } = data;
     try {
-      const { data } = await authApi.login(email, password);
-      const user = jwtDecode(data);
+      const response = await authApi.login({ email, password });
+      const user = jwtDecode<JwtPayload>(response.data.token);
       setUser(user);
     } catch (error) {
       console.log(error);
+      if (axios.isAxiosError(error) && error.response) {
+        const serverError = error as AxiosError<IErrorResponse>;
+        setError(serverError.response?.data.errors);
+        setShow(true);
+      } else {
+        setError([{ message: 'Something went wrong please try later...' }]);
+        setShow(true);
+      }
     }
   };
 
   return (
-    <>
+    <View className="flex-1 items-center px-10">
+      <AppLoginText />
+      {show && <AppErrorMessage error={error} />}
       <View className="w-full">
         <AppInputField
           icon="email-outline"
           name="email"
           placeholder="Email"
           control={control}
+          keyboardType={'email-address'}
           rules={{
             required: 'Email is required',
             pattern: {
@@ -72,8 +88,8 @@ const AppLoginForm = () => {
         title="Login"
         onPress={handleSubmit(OnLoginPressed)}
       />
-    </>
+    </View>
   );
 };
 
-export default AppLoginForm;
+export default LoginScreen;

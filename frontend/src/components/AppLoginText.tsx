@@ -3,7 +3,7 @@ import React from 'react';
 
 const AppLoginText = () => {
   return (
-    <View className="justify-center items-center my-20">
+    <View className="justify-center items-center my-16">
       <Text className="text-3xl text-primary-500 font-semibold mb-6">
         Hello Again!
       </Text>

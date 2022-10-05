@@ -2,6 +2,28 @@
 module.exports = {
   content: ['./App.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    fontSize: {
+      sm: ['14px'],
+      base: ['16px'],
+      lg: ['20px'],
+      xl: ['24px'],
+      '2xl': [
+        '1.5rem',
+        {
+          lineHeight: '2rem',
+          letterSpacing: '-0.01em',
+          fontWeight: '500',
+        },
+      ],
+      '3xl': [
+        '1.875rem',
+        {
+          lineHeight: '2.25rem',
+          letterSpacing: '-0.02em',
+          fontWeight: '700',
+        },
+      ],
+    },
     extend: {
       colors: {
         light: '#f8f4f4',
