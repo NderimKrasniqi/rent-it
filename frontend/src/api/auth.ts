@@ -3,16 +3,8 @@ import client from './client';
 interface ILoginResponse {
   token: string;
 }
-
-export interface IUser {
-  avatar?: string;
-  name?: string;
-  email: string;
-  password: string;
-}
-
-const login = (userInput: IUser) =>
-  client.post<ILoginResponse>('auth/login', userInput);
+const login = (email: string, password: string) =>
+  client.post<ILoginResponse>('auth/login', { email, password });
 
 const register = () => {
   client.post('auth/register');

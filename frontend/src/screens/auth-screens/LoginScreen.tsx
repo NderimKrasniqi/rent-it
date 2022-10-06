@@ -3,15 +3,16 @@ import React, { useContext, useState } from 'react';
 import AppLoginText from '../../components/AppLoginText';
 import { FieldValues, useForm } from 'react-hook-form';
 import AuthContext from '../../auth/context';
-import jwtDecode, { JwtPayload } from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 import AppInputField from '../../components/AppInputField';
 import AppButton from '../../components/AppButton';
 import authApi from '../../api/auth';
 import colors from '../../utils/colors';
-import { isAxiosError } from '../../utils/axios-errors';
 import { IErrorResponse } from '../../interfaces/IErrorResponse';
 import AppErrorMessage from '../../components/AppErrorMessage';
 import axios, { AxiosError } from 'axios';
+import { IDecodeResponse } from '../../interfaces/JwtDecodeResponse';
+import tokenStorage from '../../auth/storage';
 
 const LoginScreen: React.FC = () => {
   const [error, setError] = useState<{ message: string }[]>();
@@ -24,9 +25,10 @@ const LoginScreen: React.FC = () => {
     setShow(false);
     const { email, password } = data;
     try {
-      const response = await authApi.login({ email, password });
-      const user = jwtDecode<JwtPayload>(response.data.token);
-      setUser(user);
+      const response = await authApi.login(email, password);
+      const { data } = jwtDecode<IDecodeResponse>(response.data.token);
+      tokenStorage.storeToken(response.data.token);
+      setUser(data);
     } catch (error) {
       console.log(error);
       if (axios.isAxiosError(error) && error.response) {
