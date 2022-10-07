@@ -1,46 +1,18 @@
 import { View, Text } from 'react-native';
-import React, { useContext, useState } from 'react';
 import AppLoginText from '../../components/AppLoginText';
 import { FieldValues, useForm } from 'react-hook-form';
-import AuthContext from '../../auth/context';
-import jwtDecode from 'jwt-decode';
 import AppInputField from '../../components/AppInputField';
 import AppButton from '../../components/AppButton';
-import authApi from '../../api/auth';
 import colors from '../../utils/colors';
-import { IErrorResponse } from '../../interfaces/IErrorResponse';
 import AppErrorMessage from '../../components/AppErrorMessage';
-import axios, { AxiosError } from 'axios';
-import { IDecodeResponse } from '../../interfaces/IDecodeResponse';
-import tokenStorage from '../../auth/storage';
+import { useAuth } from '../../api/useAuth';
 
 const LoginScreen: React.FC = () => {
-  const [error, setError] = useState<{ message: string }[]>();
-  const [show, setShow] = useState(false);
-
   const { control, handleSubmit } = useForm();
+  const { signin, show, error } = useAuth();
 
-  const { setUser } = useContext(AuthContext);
-
-  const OnLoginPressed = async (data: FieldValues) => {
-    const { email, password } = data;
-    try {
-      const response = await authApi.login(email, password);
-      const { data } = jwtDecode<IDecodeResponse>(response.data.token);
-      tokenStorage.storeToken(response.data.token);
-      setUser(data);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-      if (axios.isAxiosError(error) && error.response) {
-        const serverError = error as AxiosError<IErrorResponse>;
-        setError(serverError.response?.data.errors);
-        setShow(true);
-      } else {
-        setError([{ message: 'Something went wrong please try later...' }]);
-        setShow(true);
-      }
-    }
+  const OnLoginPressed = async (input: FieldValues) => {
+    signin(input);
   };
 
   return (

@@ -1,6 +1,6 @@
-import client from './client';
+import { client } from './client';
 
-interface ILoginResponse {
+export interface ILoginResponse {
   token: string;
 }
 const login = (email: string, password: string) =>

@@ -56,12 +56,12 @@ export default function App() {
   }
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <AuthContext.Provider value={{ user, setUser }}>
         <NavigationContainer theme={myTheme}>
           {user ? <AppNavigator /> : <AuthNavigator />}
         </NavigationContainer>
-      </QueryClientProvider>
-    </AuthContext.Provider>
+      </AuthContext.Provider>
+    </QueryClientProvider>
   );
 }
