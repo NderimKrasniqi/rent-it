@@ -11,7 +11,7 @@ import colors from '../../utils/colors';
 import { IErrorResponse } from '../../interfaces/IErrorResponse';
 import AppErrorMessage from '../../components/AppErrorMessage';
 import axios, { AxiosError } from 'axios';
-import { IDecodeResponse } from '../../interfaces/JwtDecodeResponse';
+import { IDecodeResponse } from '../../interfaces/IDecodeResponse';
 import tokenStorage from '../../auth/storage';
 
 const LoginScreen: React.FC = () => {
@@ -19,16 +19,17 @@ const LoginScreen: React.FC = () => {
   const [show, setShow] = useState(false);
 
   const { control, handleSubmit } = useForm();
+
   const { setUser } = useContext(AuthContext);
 
   const OnLoginPressed = async (data: FieldValues) => {
-    setShow(false);
     const { email, password } = data;
     try {
       const response = await authApi.login(email, password);
       const { data } = jwtDecode<IDecodeResponse>(response.data.token);
       tokenStorage.storeToken(response.data.token);
       setUser(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
       if (axios.isAxiosError(error) && error.response) {
