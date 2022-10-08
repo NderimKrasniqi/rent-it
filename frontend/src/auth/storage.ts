@@ -6,13 +6,12 @@ const key = 'authToken';
 
 const getUser = async () => {
   const token = await getToken();
-  console.log(token);
   if (!token) {
     return null;
   }
   try {
     const { data, exp } = jwtDecode<IDecodeResponse>(token);
-    console.log(data, exp);
+
     if (exp) {
       if (Date.now() >= exp * 1000) {
         return null;
