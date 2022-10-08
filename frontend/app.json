@@ -7,7 +7,7 @@
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#557763"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

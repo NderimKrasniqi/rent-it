@@ -1,12 +1,15 @@
+import { IToken, IUser } from '../interfaces/IUser';
 import { client } from './client';
 
-export interface ILoginResponse {
-  token: string;
-}
-const login = (email: string, password: string) =>
-  client.post<ILoginResponse>('auth/login', { email, password });
+const login = (email: string, password: string) => {
+  return client.post<string>('auth/login', { email, password });
+};
 
-const register = () => {
-  client.post('auth/register');
+const register = (name: string, email: string, password: string) => {
+  return client.post<IUser>('auth/register', {
+    name,
+    email,
+    password,
+  });
 };
 export default { login, register };

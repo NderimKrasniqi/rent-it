@@ -31,7 +31,7 @@ const AppInputField: React.FC<InputFieldProps> = ({
           <View
             className={`${
               error ? 'bg-red-100' : 'bg-gray-100'
-            } flex flex-row items-center w-full rounded-md my-2.5 p-3`}
+            } flex flex-row items-center w-full rounded-md my-2.5 p-2.5`}
           >
             {icon && (
               <View className="mr-2.5">

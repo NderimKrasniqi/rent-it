@@ -27,7 +27,7 @@ const WelcomeScreen: React.FC<Props> = ({ navigation }) => {
           onPress={() => navigation.navigate('LoginScreen')}
         />
         <AppButton
-          title="Register"
+          title="SignUp"
           color="bg-secondary-900"
           underlayColor={colors.secondaryTint}
           onPress={() => navigation.navigate('RegisterScreen')}

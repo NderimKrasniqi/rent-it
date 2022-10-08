@@ -26,7 +26,7 @@ const AppErrorMessage: React.FC<ErrorMessageProp> = ({ error }) => {
     return null;
   }
   return (
-    <View className="flex flex-row absolute mt-48 bg-red-200 items-center w-full rounded-md p-3">
+    <View className="flex flex-row absolute mt-48 bg-red-200 items-center w-full rounded-md p-2.5">
       <View className="mr-2">
         <MaterialCommunityIcons
           name="close-circle-outline"

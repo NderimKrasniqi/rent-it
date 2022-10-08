@@ -9,14 +9,14 @@ import { useAuth } from '../../api/useAuth';
 
 const LoginScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
-  const { signin, show, error } = useAuth();
+  const { login, show, error } = useAuth();
 
   const OnLoginPressed = async (input: FieldValues) => {
-    signin(input);
+    login(input);
   };
 
   return (
-    <View className="flex-1 items-center px-10">
+    <View className="flex-1 items-center mx-10">
       <AppLoginText />
       {show && <AppErrorMessage error={error} />}
       <View className="w-full">
