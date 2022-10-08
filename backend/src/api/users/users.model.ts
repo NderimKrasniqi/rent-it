@@ -6,7 +6,7 @@ import { createHash } from '../../utils/hash';
 // that a User Document has
 interface IUserDocument extends Document {
   avatar?: string;
-  name?: string;
+  name: string;
   email: string;
   password: string;
 }
@@ -41,7 +41,7 @@ const userSchema = new Schema<IUserDocument>(
     },
   }
 );
-// eslint-disable-next-line func-names
+
 userSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
     const hashed = await createHash(this.get('password'));

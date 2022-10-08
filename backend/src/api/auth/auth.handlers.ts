@@ -22,18 +22,18 @@ const login = async (req: Request, res: Response) => {
 
   const token = createToken(exists);
 
-  return res.status(200).json({ token });
+  return res.status(200).json(token);
 };
 
 const register = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
 
   const userFound = await User.findOne({ email });
 
   if (userFound) {
     throw new BadRequestError('Email is in use');
   }
-  const user = User.insertOne({ email, password });
+  const user = User.insertOne({ name, email, password });
   await user.save();
 
   const token = createToken(user);

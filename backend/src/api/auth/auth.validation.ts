@@ -1,6 +1,8 @@
 import * as z from 'zod';
 
 const authUser = z.object({
+  avatar: z.string().optional(),
+  name: z.string().optional(),
   email: z.string({
     required_error: 'Email is required',
     invalid_type_error: 'Email must be a string',
