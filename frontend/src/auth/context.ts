@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import { IUser } from '../interfaces/IUser';
 
 interface IAuthContext {
@@ -6,7 +6,7 @@ interface IAuthContext {
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
 }
 
-const AuthContext = createContext<IAuthContext>({
+const AuthContext = React.createContext<IAuthContext>({
   user: null,
   setUser: () => {},
 });

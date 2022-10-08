@@ -1,9 +1,9 @@
-import authApi from './auth';
-import tokenStorage from '../auth/storage';
+import authApi from '../api/auth';
+import tokenStorage from './storage';
 import jwtDecode from 'jwt-decode';
 import axios, { AxiosError } from 'axios';
 import { useContext, useState } from 'react';
-import AuthContext from '../auth/context';
+import AuthContext from './context';
 import { IDecodeResponse } from '../interfaces/IDecodeResponse';
 import { ErrorMessage, IErrorResponse } from '../interfaces/IErrorResponse';
 import { FieldValues } from 'react-hook-form';

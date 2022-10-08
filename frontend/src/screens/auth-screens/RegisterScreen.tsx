@@ -5,7 +5,7 @@ import AppInputField from '../../components/AppInputField';
 import AppButton from '../../components/AppButton';
 import colors from '../../utils/colors';
 import AppErrorMessage from '../../components/AppErrorMessage';
-import { useAuth } from '../../api/useAuth';
+import { useAuth } from '../../auth/useAuth';
 
 const RegisterScreen: React.FC = () => {
   const { control, handleSubmit, watch } = useForm();
