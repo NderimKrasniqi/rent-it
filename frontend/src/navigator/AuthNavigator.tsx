@@ -5,7 +5,7 @@ import LoginScreen from '../screens/auth-screens/LoginScreen';
 import RegisterScreen from '../screens/auth-screens/RegisterScreen';
 import WelcomeScreen from '../screens/auth-screens/WelcomeScreen';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<StackParamList>();
 
 export type StackParamList = {
   WelcomeScreen: undefined;

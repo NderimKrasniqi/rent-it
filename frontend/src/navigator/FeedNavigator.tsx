@@ -4,16 +4,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProductFeedScreen from '../screens/app-screens/ProductFeedScreen';
 import ProductDetailScreen from '../screens/app-screens/ProductDetailScreen';
 
-const Stack = createStackNavigator();
-
 export type StackParamList = {
   ProductFeedScreen: undefined;
   ProductDetailScreen: undefined;
 };
+const Stack = createStackNavigator<StackParamList>();
 
 const FeedNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="ProductFeedScreen" component={ProductFeedScreen} />
       <Stack.Screen
         name="ProductDetailScreen"
