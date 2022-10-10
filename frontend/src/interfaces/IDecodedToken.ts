@@ -1,7 +1,7 @@
 import { IUser } from './IUser';
 
-export interface IDecodeResponse {
+export interface IDecodedToken {
   data: IUser;
-  exp: number | undefined;
+  exp: number;
   iat: number;
 }

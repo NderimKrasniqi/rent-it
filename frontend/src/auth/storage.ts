@@ -1,6 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 import jwtDecode from 'jwt-decode';
-import { IDecodeResponse } from '../interfaces/IDecodeResponse';
+import { IDecodedToken } from '../interfaces/IDecodedToken';
 
 const key = 'authToken';
 
@@ -10,8 +10,7 @@ const getUser = async () => {
     return null;
   }
   try {
-    const { data, exp } = jwtDecode<IDecodeResponse>(token);
-
+    const { data, exp } = jwtDecode<IDecodedToken>(token);
     if (exp) {
       if (Date.now() >= exp * 1000) {
         return null;

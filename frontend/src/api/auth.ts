@@ -1,4 +1,5 @@
-import { IToken, IUser } from '../interfaces/IUser';
+import { IToken } from '../interfaces/IToken';
+import { IUser } from '../interfaces/IUser';
 import { client } from './client';
 
 const login = (email: string, password: string) => {

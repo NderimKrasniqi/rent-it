@@ -1,10 +1,10 @@
 import authApi from '../api/auth';
 import tokenStorage from './storage';
-import jwtDecode from 'jwt-decode';
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 import axios, { AxiosError } from 'axios';
 import { useContext, useState } from 'react';
 import AuthContext from './context';
-import { IDecodeResponse } from '../interfaces/IDecodeResponse';
+import { IDecodedToken } from '../interfaces/IDecodedToken';
 import { ErrorMessage, IErrorResponse } from '../interfaces/IErrorResponse';
 import { FieldValues } from 'react-hook-form';
 
@@ -17,11 +17,11 @@ export const useAuth = () => {
     setShow(false);
     try {
       const response = await authApi.login(input.email, input.password);
-      const { data } = jwtDecode<IDecodeResponse>(response.data);
-      tokenStorage.storeToken(response.data);
+      const token = response.data;
+      await tokenStorage.storeToken(token);
+      const { data } = jwtDecode<IDecodedToken>(token);
       setUser(data);
     } catch (error) {
-      console.log(error);
       if (axios.isAxiosError(error) && error.response) {
         const serverError = error as AxiosError<IErrorResponse>;
         setError(serverError.response?.data.errors);
@@ -40,10 +40,9 @@ export const useAuth = () => {
         input.email,
         input.password
       );
-
       const user = response.data;
       const token = response.headers['x-auth-token'];
-      tokenStorage.storeToken(token);
+      await tokenStorage.storeToken(token);
       setUser(user);
     } catch (error) {
       console.log(error);

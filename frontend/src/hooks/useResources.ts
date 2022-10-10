@@ -11,7 +11,6 @@ export const useResources = () => {
   const restoreUser = async () => {
     const user = await tokenStorage.getUser();
     if (user) {
-      console.log(user);
       setUser(user);
     }
   };
