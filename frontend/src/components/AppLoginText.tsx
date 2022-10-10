@@ -1,14 +1,15 @@
 import { View, Text } from 'react-native';
 import React from 'react';
+import AppText from './AppText';
 
 const AppLoginText = () => {
   return (
-    <View className="justify-center items-center my-16">
-      <Text className="text-3xl text-primary-500 font-semibold mb-6">
+    <View className="flex items-center py-4">
+      <AppText className=" text-xl text-dark font-semibold my-4">
         Hello Again!
-      </Text>
-      <Text className="text-xl text-medium">Welcome back you've</Text>
-      <Text className="text-xl text-medium">been missed!</Text>
+      </AppText>
+      <AppText className="text-base">Welcome back you've</AppText>
+      <AppText className="text-base">been missed!</AppText>
     </View>
   );
 };

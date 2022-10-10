@@ -1,27 +1,32 @@
-import { SafeAreaView } from 'react-native';
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import AppCard from '../../components/AppCard';
 import colors from '../../utils/colors';
 import AppButton from '../../components/AppButton';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import AuthContext from '../../auth/context';
+import tokenStorage from '../../auth/storage';
+import AppView from '../../components/AppView';
 
 const ProductFeedScreen = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   const handleLogOut = () => {
+    tokenStorage.removeToken();
     setUser(null);
   };
-
   return (
-    <SafeAreaView className="flex-1 bg-white justify-center mx-10">
-      <StatusBar animated={true} />
-      <AppCard />
-      <AppButton
-        title="LogOut"
-        color={'bg-primary-500'}
-        onPress={() => handleLogOut()}
-      />
-    </SafeAreaView>
+    <AppView className="flex-1 bg-light justify-center">
+      <View className="px-5">
+        <StatusBar animated={true} />
+        <AppCard />
+        <AppCard />
+        <AppButton
+          title="LogOut"
+          color={'bg-primary-500'}
+          onPress={() => handleLogOut()}
+        />
+      </View>
+    </AppView>
   );
 };
 

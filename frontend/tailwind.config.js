@@ -2,47 +2,26 @@
 module.exports = {
   content: ['./App.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    fontSize: {
-      sm: ['14px'],
-      base: ['16px'],
-      lg: ['20px'],
-      xl: ['24px'],
-      '2xl': [
-        '1.5rem',
-        {
-          lineHeight: '2rem',
-          letterSpacing: '-0.01em',
-          fontWeight: '500',
-        },
-      ],
-      '3xl': [
-        '1.875rem',
-        {
-          lineHeight: '2.25rem',
-          letterSpacing: '-0.02em',
-          fontWeight: '700',
-        },
-      ],
-    },
     extend: {
+      fontSize: {
+        sm: ['14px'],
+        base: ['16px'],
+        lg: ['20px'],
+        xl: ['24px'],
+        '2xl': ['1.5rem'],
+        '3xl': ['1.875rem'],
+      },
       colors: {
         light: '#f8f4f4',
-        medium: '#6e6969',
-        dark: '#0c0c0c',
+        medium: '#A6A6A6',
+        dark: '#262626',
         danger: '#ff5252',
         primaryTint: '#70917e',
         secondaryTint: '#3a3735',
+        text: '#262626',
         primary: {
-          50: '#f5f8f6',
-          100: '#dfe8e2',
-          200: '#bed1c4',
-          300: '#96b2a1',
           400: '#70917e',
           500: '#557763',
-          600: '#425d4e',
-          700: '#384d41',
-          800: '#303f37',
-          900: '#2b3631',
         },
         secondary: {
           50: '#f7f6f6',
