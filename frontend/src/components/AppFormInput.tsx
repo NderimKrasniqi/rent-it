@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import colors from '../utils/colors';
 import AppInputErrorMessage from './AppInputErrorMessage';
 
-interface Props extends TextInputProps {
+interface FormInputProps extends TextInputProps {
   icon?: React.ComponentProps<typeof Ionicons>['name'];
   iconSize?: number;
   iconColor?: string;
@@ -15,7 +15,7 @@ interface Props extends TextInputProps {
   control: Control;
   rules: RegisterOptions;
 }
-const AppFormInput: React.FC<Props> = ({
+const AppFormInput = ({
   name,
   control,
   rules,
@@ -24,7 +24,7 @@ const AppFormInput: React.FC<Props> = ({
   iconColor = colors.dark,
   iconPosition = 'left',
   ...otherProps
-}) => {
+}: FormInputProps) => {
   const {
     field: { onChange, onBlur, value },
     fieldState: { error },

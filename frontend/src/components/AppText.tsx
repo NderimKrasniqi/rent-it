@@ -11,14 +11,14 @@ interface AppTextProps extends TextProps {
   children: React.ReactNode;
 }
 
-const AppText: React.FC<AppTextProps> = ({
+const AppText = ({
   icon,
   iconSize = 15,
   iconColor,
   iconPosition = 'left',
   children,
   ...otherProps
-}) => {
+}: AppTextProps) => {
   return (
     <View className="flex flex-row items-center">
       {icon && iconPosition === 'left' && (

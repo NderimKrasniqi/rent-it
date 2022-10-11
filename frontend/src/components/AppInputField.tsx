@@ -14,7 +14,7 @@ interface InputFieldProps extends TextInputProps {
   rules: RegisterOptions;
 }
 
-const AppInputField: React.FC<InputFieldProps> = ({
+const AppInputField = ({
   icon,
   iconSize = 15,
   iconColor = colors.dark,
@@ -23,7 +23,7 @@ const AppInputField: React.FC<InputFieldProps> = ({
   name,
   rules,
   ...otherProps
-}) => {
+}: InputFieldProps) => {
   return (
     <Controller
       control={control}

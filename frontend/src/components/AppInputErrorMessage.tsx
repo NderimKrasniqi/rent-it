@@ -4,7 +4,7 @@ import { FieldError } from 'react-hook-form';
 interface ErrorProps {
   error: FieldError | undefined;
 }
-const AppInputErrorMessage: React.FC<ErrorProps> = ({ error }) => {
+const AppInputErrorMessage = ({ error }: ErrorProps) => {
   if (!error) {
     return null;
   }

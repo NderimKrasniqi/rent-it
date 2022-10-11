@@ -4,22 +4,17 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../utils/colors';
 import AppText from './AppText';
 
-interface ErrorMessageProp {
-  error:
-    | Array<{
-        message: string;
-      }>
-    | undefined;
+interface ErrorMessageProps {
+  error: [{ message: string | undefined }];
 }
-const AppErrorMessage: React.FC<ErrorMessageProp> = ({ error }) => {
+
+const AppErrorMessage = ({ error }: ErrorMessageProps) => {
   const [alert, setAlert] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setAlert(false);
     }, 3000);
-    // To clear or cancel a timer, you call the clearTimeout(); method,
-    // passing in the timer object that you created into clearTimeout().
     return () => clearTimeout(timer);
   }, []);
 

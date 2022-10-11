@@ -3,9 +3,9 @@ import { FlatList, StyleSheet, View, FlatListProps } from 'react-native';
 import AppCard, { AppCardProps } from './AppCard';
 
 interface AppCardListProps {
-  data: any;
+  data: AppCardProps[];
 }
-const AppCardList: React.FC<AppCardListProps> = ({ data }) => {
+const AppCardList = ({ data }: AppCardListProps) => {
   return (
     <FlatList
       data={data}
