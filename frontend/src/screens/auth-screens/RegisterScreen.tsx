@@ -6,24 +6,25 @@ import colors from '../../utils/colors';
 import AppErrorMessage from '../../components/AppErrorMessage';
 import { useAuth } from '../../auth/useAuth';
 import AppRegisterText from '../../components/AppRegisterText';
-import AppView from '../../components/AppView';
+import AppScreen from '../../components/AppScreen';
+import AppFormInput from '../../components/AppFormInput';
 
 const RegisterScreen: React.FC = () => {
   const { control, handleSubmit, watch } = useForm();
-  const isPassword = watch('password');
   const { register, show, error } = useAuth();
+  const isPassword = watch('password');
 
   const OnRegisterPressed = async (input: FieldValues) => {
     register(input);
   };
 
   return (
-    <AppView className="flex-1 justify-start items-center mx-10">
+    <AppScreen className="flex-1 justify-start items-center">
       <AppRegisterText />
       <View className="h-14 w-full">
         {show && <AppErrorMessage error={error} />}
       </View>
-      <AppInputField
+      <AppFormInput
         icon="person-outline"
         name="name"
         placeholder="Name"
@@ -36,7 +37,7 @@ const RegisterScreen: React.FC = () => {
           },
         }}
       />
-      <AppInputField
+      <AppFormInput
         icon="at"
         name="email"
         placeholder="Email"
@@ -51,7 +52,7 @@ const RegisterScreen: React.FC = () => {
           },
         }}
       />
-      <AppInputField
+      <AppFormInput
         name="password"
         icon="lock-open-outline"
         placeholder="Password"
@@ -69,7 +70,7 @@ const RegisterScreen: React.FC = () => {
           },
         }}
       />
-      <AppInputField
+      <AppFormInput
         name="confirmPassword"
         icon="lock-closed-outline"
         placeholder="Confirm Password"
@@ -87,7 +88,7 @@ const RegisterScreen: React.FC = () => {
           onPress={handleSubmit(OnRegisterPressed)}
         />
       </View>
-    </AppView>
+    </AppScreen>
   );
 };
 export default RegisterScreen;

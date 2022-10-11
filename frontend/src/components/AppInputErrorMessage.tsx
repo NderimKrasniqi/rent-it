@@ -1,5 +1,4 @@
-import { View, Text } from 'react-native';
-import React, { ReactNode } from 'react';
+import { Text } from 'react-native';
 import { FieldError } from 'react-hook-form';
 
 interface ErrorProps {
@@ -9,7 +8,7 @@ const AppInputErrorMessage: React.FC<ErrorProps> = ({ error }) => {
   if (!error) {
     return null;
   }
-  return <Text className=" text-red-500 text-xs ">{error.message}</Text>;
+  return <Text className=" text-red-500 pl-3.5 text-xs ">{error.message}</Text>;
 };
 
 export default AppInputErrorMessage;

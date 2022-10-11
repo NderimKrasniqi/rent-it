@@ -5,34 +5,33 @@ import colors from '../utils/colors';
 
 interface AppCardProps {
   title: string;
-  subTitle: string;
   image: string;
-  price: number;
+  price: string;
   city: string;
 }
 
-const AppCard: React.FC = () => {
+const AppCard: React.FC<AppCardProps> = ({ title, image, price, city }) => {
   return (
-    <View className="flex rounded-md bg-white overflow-hidden p-4 space-y-4 my-2">
+    <View className="flex rounded-lg bg-white overflow-hidden p-4 space-y-4 my-2">
       <Image
-        className="w-full h-48"
-        source={require('../assets/Traktor.jpg')}
+        className="w-full h-48 rounded-lg"
+        source={{ uri: image }}
         resizeMode="cover"
       />
       <View className="flex space-y-4">
         <View className="flex-row justify-between">
-          <AppText className="font-bold text-primary-500">Head Phones</AppText>
+          <AppText className="font-bold text-primary-500">{title}</AppText>
           <AppText
             className="text-dark"
             icon="location-outline"
             iconColor={colors.primary}
             iconSize={15}
           >
-            New York
+            {city}
           </AppText>
         </View>
         <View className="flex-row justify-between items-center">
-          <AppText className="text-dark font-semibold">100$</AppText>
+          <AppText className="text-dark font-semibold">{price}</AppText>
         </View>
       </View>
     </View>

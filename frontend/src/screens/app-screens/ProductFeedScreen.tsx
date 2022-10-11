@@ -1,32 +1,27 @@
-import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { FlatList } from 'react-native';
 import AppCard from '../../components/AppCard';
-import colors from '../../utils/colors';
-import AppButton from '../../components/AppButton';
-import React, { useContext } from 'react';
-import AuthContext from '../../auth/context';
-import tokenStorage from '../../auth/storage';
-import AppView from '../../components/AppView';
+import AppScreen from '../../components/AppScreen';
+import { cardData } from '../../utils/cardData';
 
 const ProductFeedScreen = () => {
-  const { setUser } = useContext(AuthContext);
-  const handleLogOut = () => {
-    tokenStorage.removeToken();
-    setUser(null);
-  };
   return (
-    <AppView className="flex-1 bg-light justify-center">
-      <View className="px-5">
-        <StatusBar animated={true} />
-        <AppCard />
-        <AppCard />
-        <AppButton
-          title="LogOut"
-          color={'bg-primary-500'}
-          onPress={() => handleLogOut()}
-        />
-      </View>
-    </AppView>
+    <AppScreen className="flex-1 bg-light justify-center">
+      <FlatList
+        data={cardData}
+        keyExtractor={(product) => product.id.toString()}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <AppCard
+            title={item.title}
+            price={`${item.price} €`}
+            image={item.image}
+            city={item.city}
+          />
+        )}
+      />
+      <StatusBar style="auto" />
+    </AppScreen>
   );
 };
 

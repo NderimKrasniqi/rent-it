@@ -7,7 +7,8 @@ import colors from '../../utils/colors';
 import AppErrorMessage from '../../components/AppErrorMessage';
 import { useAuth } from '../../auth/useAuth';
 import AppText from '../../components/AppText';
-import AppView from '../../components/AppView';
+import AppScreen from '../../components/AppScreen';
+import AppFormInput from '../../components/AppFormInput';
 
 const LoginScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
@@ -18,13 +19,13 @@ const LoginScreen: React.FC = () => {
   };
 
   return (
-    <AppView className="flex-1 items-center mx-10">
+    <AppScreen className="flex-1 items-center">
       <AppLoginText />
       <View className="w-full">
         <View className="h-14">
           {show && <AppErrorMessage error={error} />}
         </View>
-        <AppInputField
+        <AppFormInput
           icon="at"
           name="email"
           placeholder="Email@adress.com"
@@ -39,7 +40,7 @@ const LoginScreen: React.FC = () => {
             },
           }}
         />
-        <AppInputField
+        <AppFormInput
           icon="lock-closed-outline"
           name="password"
           placeholder="Minimum of 6 characters"
@@ -67,7 +68,7 @@ const LoginScreen: React.FC = () => {
         title="Login"
         onPress={handleSubmit(OnLoginPressed)}
       />
-    </AppView>
+    </AppScreen>
   );
 };
 
