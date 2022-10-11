@@ -42,7 +42,7 @@ export const cardData: CardData[] = [
   },
   {
     id: 10,
-    title: 'The lone tree, majestic landscape of New Zealand',
+    title: 'Thelandscape of New Zealand',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     city: 'New Zealand',
     image: 'https://source.unsplash.com/ATt_9Pp7LEI/800x599',
