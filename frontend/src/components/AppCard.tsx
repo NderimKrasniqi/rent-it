@@ -3,7 +3,7 @@ import React from 'react';
 import AppText from './AppText';
 import colors from '../utils/colors';
 
-interface AppCardProps {
+export interface AppCardProps {
   title: string;
   image: string;
   price: string;
@@ -31,7 +31,7 @@ const AppCard: React.FC<AppCardProps> = ({ title, image, price, city }) => {
           </AppText>
         </View>
         <View className="flex-row justify-between items-center">
-          <AppText className="text-dark font-semibold">{price}</AppText>
+          <AppText className="text-dark font-semibold">{`${price}$`}</AppText>
         </View>
       </View>
     </View>
