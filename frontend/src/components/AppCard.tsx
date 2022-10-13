@@ -16,7 +16,7 @@ const AppCard = ({ title, image, price, city }: AppCardProps) => {
   console.log(image);
   return (
     <View className="flex rounded-lg bg-white overflow-hidden p-4 space-y-4 my-2">
-      <View className="flex items-center justify-between">
+      <View>
         <Image
           className="w-full h-48 rounded-lg"
           source={{ uri: image }}
@@ -30,6 +30,7 @@ const AppCard = ({ title, image, price, city }: AppCardProps) => {
           animating={isLoading}
         />
       </View>
+
       <View className="flex space-y-4">
         <View className="flex-row justify-between">
           <AppText className="font-bold text-primary-500">{title}</AppText>
