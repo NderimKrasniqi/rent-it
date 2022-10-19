@@ -1,6 +1,6 @@
 import authApi from '../api/auth';
 import tokenStorage from './storage';
-import jwtDecode, { JwtPayload } from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 import axios, { AxiosError } from 'axios';
 import { useContext, useState } from 'react';
 import AuthContext from './context';
@@ -9,7 +9,7 @@ import { ErrorMessage, IErrorResponse } from '../interfaces/IErrorResponse';
 import { FieldValues } from 'react-hook-form';
 
 export const useAuth = () => {
-  const [error, setError] = useState<ErrorMessage>();
+  const [errors, setErrors] = useState<ErrorMessage[]>();
   const [show, setShow] = useState(false);
   const { setUser } = useContext(AuthContext);
 
@@ -24,10 +24,10 @@ export const useAuth = () => {
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const serverError = error as AxiosError<IErrorResponse>;
-        setError(serverError.response?.data.errors);
+        setErrors(serverError.response?.data.errors);
         setShow(true);
       } else {
-        setError([{ message: 'Something went wrong please try later...' }]);
+        setErrors([{ message: 'Something went wrong please try later...' }]);
         setShow(true);
       }
     }
@@ -48,13 +48,14 @@ export const useAuth = () => {
       console.log(error);
       if (axios.isAxiosError(error) && error.response) {
         const serverError = error as AxiosError<IErrorResponse>;
-        setError(serverError.response?.data.errors);
+        console.log(serverError.response?.data.errors);
+        setErrors(serverError.response?.data.errors);
         setShow(true);
       } else {
-        setError([{ message: 'Something went wrong please try later...' }]);
+        setErrors([{ message: 'Something went wrong please try later...' }]);
         setShow(true);
       }
     }
   };
-  return { login, register, error, show };
+  return { login, register, errors, show };
 };

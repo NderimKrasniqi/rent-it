@@ -10,9 +10,9 @@ import AppText from '../../components/AppText';
 import AppScreen from '../../components/AppScreen';
 import AppFormInput from '../../components/AppFormInput';
 
-const LoginScreen: React.FC = () => {
+const LoginScreen = () => {
   const { control, handleSubmit } = useForm();
-  const { login, show, error } = useAuth();
+  const { login, show, errors } = useAuth();
 
   const OnLoginPressed = async (input: FieldValues) => {
     login(input);
@@ -23,7 +23,7 @@ const LoginScreen: React.FC = () => {
       <AppLoginText />
       <View className="w-full">
         <View className="h-14">
-          {show && <AppErrorMessage error={error} />}
+          {show && <AppErrorMessage errors={errors} />}
         </View>
         <AppFormInput
           icon="at"

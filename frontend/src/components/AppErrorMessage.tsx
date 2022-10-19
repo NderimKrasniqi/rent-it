@@ -3,12 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../utils/colors';
 import AppText from './AppText';
+import { IErrorResponse } from '../interfaces/IErrorResponse';
 
-interface ErrorMessageProps {
-  error: [{ message: string | undefined }];
-}
-
-const AppErrorMessage = ({ error }: ErrorMessageProps) => {
+const AppErrorMessage = ({ errors }: IErrorResponse) => {
   const [alert, setAlert] = useState(true);
 
   useEffect(() => {
@@ -33,7 +30,7 @@ const AppErrorMessage = ({ error }: ErrorMessageProps) => {
       <View className="flex">
         <AppText className="text-danger font-bold">{'Error'}</AppText>
         <AppText className="text-danger">
-          {error?.map((err) => err.message)}
+          {errors?.map((err) => err.message)}
         </AppText>
       </View>
     </View>

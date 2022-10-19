@@ -1,11 +1,14 @@
 import { View, Text } from 'react-native';
 import React from 'react';
+import AppView from '../../components/AppScreen';
 
 const ProductEditScreen = () => {
   return (
-    <View>
-      <Text>ProductEditScreen</Text>
-    </View>
+    <AppView>
+      <View>
+        <Text>Hello</Text>
+      </View>
+    </AppView>
   );
 };
 

@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+
 import React, { useContext } from 'react';
 import AuthContext from '../../auth/context';
 import tokenStorage from '../../auth/storage';

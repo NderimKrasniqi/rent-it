@@ -3,8 +3,7 @@ import AccountScreen from '../screens/app-screens/AccountScreen';
 import ProductEditScreen from '../screens/app-screens/ProductEditScreen';
 import FeedNavigator from './FeedNavigator';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-const Tab = createBottomTabNavigator<TabParamList>();
+import TabBarButton from './TabBarButton';
 
 export type TabParamList = {
   FeedNavigator: undefined;
@@ -12,32 +11,46 @@ export type TabParamList = {
   AccountScreen: undefined;
 };
 
+const Tab = createBottomTabNavigator<TabParamList>();
+
 const AppNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      initialRouteName="FeedNavigator"
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+      }}
+    >
       <Tab.Screen
         name="FeedNavigator"
         component={FeedNavigator}
         options={{
-          tabBarIcon: () => <MaterialCommunityIcons name="home" size={24} />,
+          tabBarIcon: ({ size, color }) => (
+            <MaterialCommunityIcons name="home" size={size} color={color} />
+          ),
         }}
       />
 
       <Tab.Screen
         name="ProductEditScreen"
         component={ProductEditScreen}
-        options={{
-          tabBarIcon: () => (
-            <MaterialCommunityIcons name="plus-circle" size={24} />
+        options={({ navigation }) => ({
+          tabBarButton: () => (
+            <TabBarButton
+              onPress={() => navigation.navigate('ProductEditScreen')}
+            />
           ),
-        }}
+        })}
       />
 
       <Tab.Screen
         name="AccountScreen"
         component={AccountScreen}
         options={{
-          tabBarIcon: () => <MaterialCommunityIcons name="account" size={24} />,
+          tabBarIcon: ({ size, color }) => (
+            <MaterialCommunityIcons name="account" size={size} color={color} />
+          ),
         }}
       />
     </Tab.Navigator>

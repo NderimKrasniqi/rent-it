@@ -1,7 +1,7 @@
-export type ErrorMessage = {
+export interface ErrorMessage {
   message: string;
-}[];
+}
 
 export interface IErrorResponse {
-  errors: ErrorMessage | undefined;
+  errors: ErrorMessage[] | undefined;
 }

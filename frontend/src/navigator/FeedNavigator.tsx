@@ -1,18 +1,24 @@
-import { View, Text } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import ProductFeedScreen from '../screens/app-screens/ProductFeedScreen';
 import ProductDetailScreen from '../screens/app-screens/ProductDetailScreen';
+import { CardData } from '../utils/cardData';
 
-export type StackParamList = {
+export type FeedStackParamsList = {
   ProductFeedScreen: undefined;
-  ProductDetailScreen: undefined;
+  ProductDetailScreen: {
+    item: CardData;
+  };
 };
-const Stack = createStackNavigator<StackParamList>();
+const Stack = createStackNavigator<FeedStackParamsList>();
 
-const FeedNavigator = () => {
+const FeedStack = () => {
+  const { width } = useWindowDimensions();
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false, gestureResponseDistance: width / 2 }}
+    >
       <Stack.Screen name="ProductFeedScreen" component={ProductFeedScreen} />
       <Stack.Screen
         name="ProductDetailScreen"
@@ -22,4 +28,4 @@ const FeedNavigator = () => {
   );
 };
 
-export default FeedNavigator;
+export default FeedStack;
