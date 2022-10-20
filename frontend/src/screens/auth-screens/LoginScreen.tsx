@@ -61,13 +61,13 @@ const LoginScreen = () => {
         <AppText className="w-full text-right text-xs text-blue-500 font-semibold my-2">
           Forgot password?
         </AppText>
+        <AppButton
+          color="bg-primary-500"
+          underlayColor={colors.primaryTint}
+          title="Login"
+          onPress={handleSubmit(OnLoginPressed)}
+        />
       </View>
-      <AppButton
-        color="bg-primary-500"
-        underlayColor={colors.primaryTint}
-        title="Login"
-        onPress={handleSubmit(OnLoginPressed)}
-      />
     </AppScreen>
   );
 };

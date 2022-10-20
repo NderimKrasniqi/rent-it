@@ -1,8 +1,9 @@
-import { View, Image, ActivityIndicator } from 'react-native';
-import React, { useState } from 'react';
+import { View, Image, ActivityIndicator, Animated } from 'react-native';
+import { useState } from 'react';
 import AppText from './AppText';
 import colors from '../utils/colors';
 import { Pressable } from 'react-native';
+import { useBounceAnimation } from '../hooks/useBounceAnimation';
 
 export interface AppCardProps {
   id: number;
@@ -15,10 +16,18 @@ export interface AppCardProps {
 
 const AppCard = ({ title, image, price, city, onPress }: AppCardProps) => {
   const [isLoading, setLoading] = useState(true);
-  console.log(image);
+  const { pressIn, pressOut, animatedStyle } = useBounceAnimation();
+
   return (
-    <Pressable onPress={onPress}>
-      <View className="flex rounded-lg bg-white overflow-hidden p-4 space-y-4 my-2">
+    <Pressable
+      onPressIn={() => pressIn()}
+      onPressOut={() => pressOut()}
+      onPress={onPress}
+    >
+      <Animated.View
+        style={animatedStyle}
+        className="flex rounded-lg bg-white overflow-hidden p-4 space-y-4 my-2"
+      >
         <View>
           <Image
             className="w-full h-48 rounded-lg"
@@ -50,7 +59,7 @@ const AppCard = ({ title, image, price, city, onPress }: AppCardProps) => {
             <AppText className="text-dark font-semibold">{`${price}$`}</AppText>
           </View>
         </View>
-      </View>
+      </Animated.View>
     </Pressable>
   );
 };

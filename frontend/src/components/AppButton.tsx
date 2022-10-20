@@ -1,8 +1,12 @@
+import React from 'react';
 import {
+  Animated,
+  Pressable,
   Text,
-  TouchableHighlight,
   TouchableHighlightProps,
+  View,
 } from 'react-native';
+import { useBounceAnimation } from '../hooks/useBounceAnimation';
 
 interface AppButtonProps extends TouchableHighlightProps {
   title: string;
@@ -10,15 +14,18 @@ interface AppButtonProps extends TouchableHighlightProps {
 }
 
 const AppButton = ({ title, color, ...otherProps }: AppButtonProps) => {
+  const { pressIn, pressOut, animatedStyle } = useBounceAnimation();
   return (
-    <TouchableHighlight
-      className={`bg-medium w-full rounded-md p-3.5 my-2 ${color}`}
-      {...otherProps}
-    >
-      <Text className="text-light text-center text-lg font-bold uppercase">
-        {title}
-      </Text>
-    </TouchableHighlight>
+    <Pressable onPressIn={pressIn} onPressOut={pressOut} {...otherProps}>
+      <Animated.View
+        className={`bg-medium w-full rounded-md p-3.5 my-2 ${color}`}
+        style={animatedStyle}
+      >
+        <Text className="text-light text-center text-lg font-bold uppercase">
+          {title}
+        </Text>
+      </Animated.View>
+    </Pressable>
   );
 };
 

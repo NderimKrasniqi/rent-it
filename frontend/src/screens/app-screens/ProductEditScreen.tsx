@@ -4,10 +4,8 @@ import AppView from '../../components/AppScreen';
 
 const ProductEditScreen = () => {
   return (
-    <AppView>
-      <View>
-        <Text>Hello</Text>
-      </View>
+    <AppView className="flex-1 bg-light">
+      <Text>Hello</Text>
     </AppView>
   );
 };
