@@ -11,7 +11,7 @@ import AppFormInput from '../../components/AppFormInput';
 
 const RegisterScreen: React.FC = () => {
   const { control, handleSubmit, watch } = useForm();
-  const { register, show, error } = useAuth();
+  const { register, show, errors } = useAuth();
   const isPassword = watch('password');
 
   const OnRegisterPressed = async (input: FieldValues) => {
@@ -22,7 +22,7 @@ const RegisterScreen: React.FC = () => {
     <AppScreen className="flex-1 justify-start items-center">
       <AppRegisterText />
       <View className="h-14 w-full">
-        {show && <AppErrorMessage error={error} />}
+        {show && <AppErrorMessage errors={errors} />}
       </View>
       <AppFormInput
         icon="person-outline"

@@ -18,7 +18,7 @@ const AppButton = ({ title, color, ...otherProps }: AppButtonProps) => {
   return (
     <Pressable onPressIn={pressIn} onPressOut={pressOut} {...otherProps}>
       <Animated.View
-        className={`bg-medium w-full rounded-md p-3.5 my-2 ${color}`}
+        className={`bg-medium w-full rounded-lg p-3.5 my-2 ${color}`}
         style={animatedStyle}
       >
         <Text className="text-light text-center text-lg font-bold uppercase">
