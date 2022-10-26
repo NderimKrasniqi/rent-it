@@ -15,7 +15,6 @@ const AppIcon = ({
   bgColor = 'black',
   IconColor = 'white',
 }: AppIconProps) => {
-  console.log(`bg-[${bgColor}]`);
   return (
     <View
       style={{ backgroundColor: bgColor, width: size, height: size }}

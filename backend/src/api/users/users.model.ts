@@ -1,4 +1,4 @@
-import { Model, model, Schema, Document } from 'mongoose';
+import { Model, model, Schema, Document, Types } from 'mongoose';
 import { UserInput } from '../auth/auth.validation';
 import { createHash } from '../../utils/hash';
 
@@ -6,7 +6,8 @@ import { createHash } from '../../utils/hash';
 // that a User Document has
 interface IUserDocument extends Document {
   avatar?: string;
-  name: string;
+  name?: string;
+  products?: [Types.ObjectId];
   email: string;
   password: string;
 }
@@ -20,10 +21,10 @@ const userSchema = new Schema<IUserDocument>(
   {
     avatar: { type: String },
     name: { type: String },
+    products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
     email: {
       type: String,
       required: true,
-      unique: true,
     },
     password: {
       type: String,

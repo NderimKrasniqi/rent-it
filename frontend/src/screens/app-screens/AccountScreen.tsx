@@ -33,7 +33,11 @@ const AccountScreen = () => {
           keyExtractor={(item) => item.id.toString()}
           scrollEnabled={false}
         />
-        <AppButton title="Log Out" color="bg-primary-500" />
+        <AppButton
+          title="Log Out"
+          color="bg-primary-500"
+          onPress={handleLogOut}
+        />
       </View>
     </AppView>
   );

@@ -10,7 +10,7 @@ router.post(
   validate({
     body: authUser,
   }),
-  register,
+  register
 );
 
 router.post(
@@ -18,7 +18,7 @@ router.post(
   validate({
     body: authUser,
   }),
-  login,
+  login
 );
 
 export default router;
