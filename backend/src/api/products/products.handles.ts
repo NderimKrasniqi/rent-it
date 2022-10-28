@@ -16,8 +16,9 @@ const createProduct = async (req: Request, res: Response) => {
   const { userId } = req.params;
   const product = new Product(req.body);
   const result = await product.save();
-  await User.findByIdAndUpdate(userId, { $push: { products: product._id } });
-
+  await User.findByIdAndUpdate(userId, {
+    $push: { products: product._id },
+  });
   res.status(201).json(result);
 };
 

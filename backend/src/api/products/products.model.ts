@@ -1,10 +1,9 @@
-import { timeStamp } from 'console';
 import { model, Schema, Document } from 'mongoose';
 
 export interface IProductDocument extends Document {
   image: string;
   title: string;
-  price: number;
+  price: string;
   city: string;
   createdAt: Date;
 }
@@ -12,8 +11,9 @@ const productSchema = new Schema<IProductDocument>(
   {
     image: { type: String },
     title: { type: String },
-    price: { type: Number },
+    price: { type: String },
     city: { type: String },
+    createdAt: { type: Date, default: Date.now },
   },
   {
     toJSON: {

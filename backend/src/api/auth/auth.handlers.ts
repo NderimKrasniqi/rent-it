@@ -22,7 +22,7 @@ const login = async (req: Request, res: Response) => {
 
   const token = createToken(exists);
 
-  return res.status(200).send(token);
+  return res.status(200).header('x-auth-token', token).send(token);
 };
 
 const register = async (req: Request, res: Response) => {
