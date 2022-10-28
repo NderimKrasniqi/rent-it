@@ -1,8 +1,33 @@
 import axios from 'axios';
-export const client = axios.create({
+import tokenStorage from '../auth/storage';
+
+export const auth = axios.create({
   baseURL: `http://192.168.10.233:5000/api/v1/`,
   headers: {
     'Content-type': 'application/json',
   },
-  timeout: 500,
+  timeout: 1000,
 });
+
+export const client = axios.create({
+  baseURL: `http://192.168.10.233:5000/api/v1/users`,
+  headers: {
+    'Content-type': 'application/json',
+  },
+  timeout: 5000,
+});
+
+client.interceptors.request.use(
+  async (config) => {
+    if (config.headers) {
+      const token = await tokenStorage.getToken();
+      if (token) {
+        config.headers['x-auth-token'] = token;
+      }
+      return config;
+    }
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);

@@ -6,18 +6,19 @@ import AppAvatar from '../../components/AppAvatar';
 import AppButton from '../../components/AppButton';
 import AppListItem from '../../components/AppListItem';
 import AppView from '../../components/AppScreen';
+import { useUser } from '../../hooks/useUser';
 import { AccountListData, listData } from '../../utils/accountListData';
-
 const AccountScreen = () => {
+  const { data } = useUser();
   const { setUser } = useContext(AuthContext);
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     tokenStorage.removeToken();
     setUser(null);
   };
   return (
     <AppView className="flex-1 bg-light justify-center px-5">
       <View className="justify-center items-center h-2/5">
-        <AppAvatar />
+        <AppAvatar name={data?.name} email={data?.email} />
       </View>
       <View className="flex h-3/5 mb-6">
         <FlatList<AccountListData>

@@ -13,7 +13,7 @@ interface FormInputProps extends TextInputProps {
   iconPosition?: 'left' | 'right';
   name: string;
   control: Control;
-  rules: RegisterOptions;
+  rules?: RegisterOptions;
 }
 const AppFormInput = ({
   name,

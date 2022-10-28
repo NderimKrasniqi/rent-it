@@ -1,33 +1,38 @@
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import React from 'react';
+import { Control, useController } from 'react-hook-form';
+import colors from '../utils/colors';
 
-const AppImagePicker = () => {
-  const [image, setImage] = React.useState<string>();
+interface AppImagePickerProps {
+  name: string;
+  control: Control;
+}
+
+const AppImagePicker = ({ name, control }: AppImagePickerProps) => {
+  const {
+    field: { onChange, value },
+  } = useController({ name, control });
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
-      base64: true,
       quality: 0,
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
-      setImage(result.base64);
-      console.log(result.base64);
+      onChange(result.uri);
     }
   };
 
   return (
     <View className="flex-1 w-full justify-center items-center">
       <TouchableOpacity onPress={() => pickImage()}>
-        {image ? (
+        {value ? (
           <Image
-            source={{ uri: 'data:image/jpeg;base64,' + image }}
+            source={{ uri: value }}
             style={{ width: 100, height: 150, borderRadius: 10 }}
           />
         ) : (

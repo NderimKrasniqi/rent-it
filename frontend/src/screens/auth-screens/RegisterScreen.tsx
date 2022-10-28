@@ -1,6 +1,5 @@
 import { View } from 'react-native';
 import { FieldValues, useForm } from 'react-hook-form';
-import AppInputField from '../../components/AppInputField';
 import AppButton from '../../components/AppButton';
 import colors from '../../utils/colors';
 import AppErrorMessage from '../../components/AppErrorMessage';
