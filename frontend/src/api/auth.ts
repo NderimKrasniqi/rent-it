@@ -1,15 +1,12 @@
+import { FieldValues } from 'react-hook-form';
 import { IUser } from '../interfaces/IUser';
-import { auth } from './client';
+import { client } from './client';
 
-const login = (email: string, password: string) => {
-  return auth.post<string>('auth/login', { email, password });
+const login = (input: FieldValues) => {
+  return client.post<string>('auth/login', input);
 };
 
-const register = (name: string, email: string, password: string) => {
-  return auth.post<IUser>('auth/register', {
-    name,
-    email,
-    password,
-  });
+const register = (input: FieldValues) => {
+  return client.post<IUser>('auth/register', input);
 };
 export default { login, register };

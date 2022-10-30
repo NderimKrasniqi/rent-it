@@ -8,23 +8,10 @@ const getAllProducts = async () => {
   return response.data;
 };
 
-const getUser = async () => {
-  try {
-    const user = await tokenStorage.getUser();
-    const { data } = await client.get(`/${user?.id}`);
-    return data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      const serverError = error as AxiosError<IErrorResponse>;
-      return serverError.response?.data.errors;
-    }
-  }
-};
-
 const addProduct = async (product: any) => {
   try {
     const user = await tokenStorage.getUser();
-    const { data } = await client.post(`${user?.id}/products`, product);
+    const { data } = await client.post(`users/${user?.id}/products`, product);
     return data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -34,4 +21,4 @@ const addProduct = async (product: any) => {
   }
 };
 
-export default { getAllProducts, getUser, addProduct };
+export default { getAllProducts, addProduct };

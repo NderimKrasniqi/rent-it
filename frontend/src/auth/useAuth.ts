@@ -13,10 +13,10 @@ export const useAuth = () => {
   const [show, setShow] = useState(false);
   const { setUser } = useContext(AuthContext);
 
-  const login = async (input: FieldValues): Promise<void> => {
+  const login = async (input: FieldValues) => {
     setShow(false);
     try {
-      const response = await authApi.login(input.email, input.password);
+      const response = await authApi.login(input);
       const token = response.data;
       await tokenStorage.storeToken(token);
       const { data } = jwtDecode<IDecodedToken>(token);
@@ -35,11 +35,7 @@ export const useAuth = () => {
   const register = async (input: FieldValues): Promise<void> => {
     setShow(false);
     try {
-      const response = await authApi.register(
-        input.name,
-        input.email,
-        input.password
-      );
+      const response = await authApi.register(input);
       const user = response.data;
       const token = response.headers['x-auth-token'];
       await tokenStorage.storeToken(token);

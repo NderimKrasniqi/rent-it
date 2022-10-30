@@ -6,24 +6,29 @@ import AppFormInput from '../../components/AppFormInput';
 import { FieldValues, useForm } from 'react-hook-form';
 import AppButton from '../../components/AppButton';
 import colors from '../../utils/colors';
-import dataApi from '../../api/data';
-import { useMutation } from '@tanstack/react-query';
+import { useProduct } from '../../hooks/useProduct';
 
 const ProductEditScreen = () => {
-  const { mutate } = useMutation(dataApi.addProduct);
+  const { createProduct } = useProduct();
   const { control, handleSubmit, reset } = useForm();
 
   const onSubmit = (input: FieldValues) => {
-    mutate(input);
+    createProduct(input);
     reset({ title: '', price: '', image: '', city: '' });
   };
 
   return (
     <AppView className="flex-1 bg-light px-5">
-      <View className="border border-red-500 flex h-1/4">
-        <AppImagePicker name="image" control={control} />
+      <View className="flex h-1/4">
+        <AppImagePicker
+          name="image"
+          control={control}
+          rules={{
+            required: 'You need to provide an image',
+          }}
+        />
       </View>
-      <View className="border border-green-500 flex h-3/4">
+      <View className="flex h-3/4">
         <AppFormInput name="title" placeholder="Title" control={control} />
         <AppFormInput name="city" placeholder="City" control={control} />
         <AppFormInput name="price" placeholder="Price" control={control} />

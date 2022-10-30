@@ -1,16 +1,8 @@
 import axios from 'axios';
 import tokenStorage from '../auth/storage';
 
-export const auth = axios.create({
-  baseURL: `http://192.168.10.233:5000/api/v1/`,
-  headers: {
-    'Content-type': 'application/json',
-  },
-  timeout: 1000,
-});
-
 export const client = axios.create({
-  baseURL: `http://192.168.10.233:5000/api/v1/users`,
+  baseURL: `http://192.168.10.233:5000/api/v1/`,
   headers: {
     'Content-type': 'application/json',
   },
