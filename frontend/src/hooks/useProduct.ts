@@ -1,26 +1,20 @@
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
-import { IProduct } from './../interfaces/IProduct';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import Product from '../api/products';
-import { IErrorResponse } from '../interfaces/IErrorResponse';
+import { client } from '../api/client';
 
-export const useProduct = () => {
-  const queryClient = useQueryClient();
-  const {
-    data,
-    error,
-    mutate: createProduct,
-    isError,
-    isLoading,
-  } = useMutation<IProduct, IErrorResponse, FieldValues>(Product.addProduct, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['products']);
-    },
-  });
-  return { data, error, createProduct, isError, isLoading };
+type TUseAddProduct = {
+  product: FieldValues;
+  userId: string | undefined;
 };
-
-// const add = useMutation(async (employee) => {
-//   const { data } = await axios.post('/api/Employee', employee);
-//   return data;
-// });
+export const useAddProduct = () => {
+  const [progress, setProgress] = useState<number>(0);
+  const query = useMutation(({ product, userId }: TUseAddProduct) =>
+    client.post(`users/${userId}/products`, product, {
+      onUploadProgress(progressEvent) {
+        setProgress(progressEvent.loaded / progressEvent.total);
+      },
+    })
+  );
+  return { ...query, progress };
+};

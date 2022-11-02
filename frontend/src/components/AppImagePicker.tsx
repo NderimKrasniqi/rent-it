@@ -1,6 +1,6 @@
 import { View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 import colors from '../utils/colors';
 
@@ -11,9 +11,14 @@ interface AppImagePickerProps {
 }
 
 const AppImagePicker = ({ name, control, rules }: AppImagePickerProps) => {
-  const {
-    field: { onChange, value },
-  } = useController({ name, control, rules });
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
+  const requestPermission = async () => {
+    const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!granted) alert('You need to enable permission to access the library.');
+  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -30,19 +35,29 @@ const AppImagePicker = ({ name, control, rules }: AppImagePickerProps) => {
     }
   };
 
+  const {
+    field: { onChange, value, ref },
+  } = useController({ name, control, rules });
+
   return (
-    <View className="bg-red-500 flex-1 justify-center items-center rounded-lg">
-      <TouchableOpacity onPress={() => pickImage()}>
-        {value ? (
-          <Image source={{ uri: value }} className="w-60 h-full rounded-lg" />
-        ) : (
+    <TouchableOpacity onPress={() => pickImage()}>
+      {value ? (
+        <View className="w-full h-full rounded-lg overflow-hidden">
+          <Image
+            source={{ uri: value }}
+            className="w-full h-full"
+            resizeMode="contain"
+          />
+        </View>
+      ) : (
+        <View className="border-dashed border border-medium  w-full h-full justify-center items-center bg-white rounded-lg overflow-hidden">
           <Image
             source={require('../assets/imgPlaceholder.jpg')}
-            className=" h-full rounded-lg"
+            className="w-28 h-28 rounded-full"
           />
-        )}
-      </TouchableOpacity>
-    </View>
+        </View>
+      )}
+    </TouchableOpacity>
   );
 };
 

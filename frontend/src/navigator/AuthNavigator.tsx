@@ -5,9 +5,9 @@ import LoginScreen from '../screens/auth-screens/LoginScreen';
 import RegisterScreen from '../screens/auth-screens/RegisterScreen';
 import WelcomeScreen from '../screens/auth-screens/WelcomeScreen';
 
-const Stack = createStackNavigator<StackParamList>();
+const Stack = createStackNavigator<AuthParamList>();
 
-export type StackParamList = {
+export type AuthParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
   RegisterScreen: undefined;

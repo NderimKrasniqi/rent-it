@@ -1,12 +1,12 @@
-import { IUser } from './../interfaces/IUser';
+import { AxiosError } from 'axios';
+import { IErrorResponse } from './../interfaces/IErrorResponse';
 import { useQuery } from '@tanstack/react-query';
-import Users from '../api/user';
-import { IErrorResponse } from '../interfaces/IErrorResponse';
+import { getUser } from '../api/user';
+import { IUser } from '../interfaces/IUser';
 
 export const useUser = () => {
-  const { data, error, isLoading } = useQuery<IUser, IErrorResponse>(
-    ['user'],
-    Users.getUser
-  );
-  return { data, error, isLoading };
+  const query = useQuery<IUser, AxiosError<IErrorResponse>>(['user'], getUser, {
+    retry: false,
+  });
+  return { ...query };
 };

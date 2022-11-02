@@ -6,20 +6,15 @@ export const client = axios.create({
   headers: {
     'Content-type': 'application/json',
   },
-  timeout: 5000,
+  timeout: 2000,
 });
 
-client.interceptors.request.use(
-  async (config) => {
-    if (config.headers) {
-      const token = await tokenStorage.getToken();
-      if (token) {
-        config.headers['x-auth-token'] = token;
-      }
-      return config;
+client.interceptors.request.use(async (config) => {
+  if (config.headers) {
+    const token = await tokenStorage.getToken();
+    if (token) {
+      config.headers['x-auth-token'] = token;
     }
-  },
-  (error) => {
-    return Promise.reject(error);
+    return config;
   }
-);
+});

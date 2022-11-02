@@ -1,24 +1,37 @@
-import { View } from 'react-native';
-import React from 'react';
+import { View, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import AppView from '../../components/AppScreen';
 import AppImagePicker from '../../components/AppImagePicker';
 import AppFormInput from '../../components/AppFormInput';
 import { FieldValues, useForm } from 'react-hook-form';
 import AppButton from '../../components/AppButton';
 import colors from '../../utils/colors';
-import { useProduct } from '../../hooks/useProduct';
+import { useAddProduct } from '../../hooks/useProduct';
+import UploadScreen from './UploadScreen';
+import { useUser } from '../../hooks/useUser';
 
 const ProductEditScreen = () => {
-  const { createProduct } = useProduct();
+  const [show, setShow] = useState(false);
+  const { data } = useUser();
+  const { progress, mutate: addProduct } = useAddProduct();
   const { control, handleSubmit, reset } = useForm();
 
+  useEffect(() => {
+    reset();
+  }, []);
+
   const onSubmit = (input: FieldValues) => {
-    createProduct(input);
-    reset({ title: '', price: '', image: '', city: '' });
+    setShow(true);
+    addProduct({ product: input, userId: data?.id });
   };
 
   return (
     <AppView className="flex-1 bg-light px-5">
+      <UploadScreen
+        progress={progress}
+        show={show}
+        onDone={() => setShow(false)}
+      />
       <View className="flex h-1/4">
         <AppImagePicker
           name="image"
@@ -42,5 +55,4 @@ const ProductEditScreen = () => {
     </AppView>
   );
 };
-
 export default ProductEditScreen;

@@ -1,5 +1,6 @@
+import { StackScreenProps } from '@react-navigation/stack';
 import React, { useContext } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, Text } from 'react-native';
 import AuthContext from '../../auth/context';
 import tokenStorage from '../../auth/storage';
 import AppAvatar from '../../components/AppAvatar';
@@ -8,8 +9,9 @@ import AppListItem from '../../components/AppListItem';
 import AppView from '../../components/AppScreen';
 import { useUser } from '../../hooks/useUser';
 import { AccountListData, listData } from '../../utils/accountListData';
+
 const AccountScreen = () => {
-  const { data } = useUser();
+  const { data, error, isError } = useUser();
   const { setUser } = useContext(AuthContext);
   const handleLogOut = async () => {
     tokenStorage.removeToken();
