@@ -7,22 +7,16 @@ import { userParam } from './users.validate';
 
 const router = express.Router();
 
-router.get('/:userId', validate({ params: userParam }), requireAuth, getUser);
-router.put(
-  '/:userId',
-  [validate({ params: userParam }), requireAuth],
-  updateUser
-);
-router.delete(
-  '/:userId',
-  [validate({ params: userParam }), requireAuth],
-  deleteUser
-);
-
 router.use(
   '/:userId/products',
   [validate({ params: userParam }), requireAuth],
   productRouter
 );
+
+router
+  .route('/:userId')
+  .get([validate({ params: userParam }), requireAuth], getUser)
+  .put([validate({ params: userParam }), requireAuth], updateUser)
+  .delete([validate({ params: userParam }), requireAuth], deleteUser);
 
 export default router;

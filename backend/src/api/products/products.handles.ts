@@ -1,40 +1,69 @@
 import { User } from '../users/users.model';
 import { Response, Request } from 'express';
 import Product from './products.model';
+import { BadRequestError } from '../../errors/bad-request-error';
 
 const getProducts = async (req: Request, res: Response) => {
-  const { userId } = req.params;
-  const user = await User.findById(userId).populate('products');
-  res.json(user?.products);
+  let query;
+  if (req.params.userId) {
+    const { userId } = req.params;
+    console.log(userId);
+    query = await Product.find().where('user').equals(userId).populate({
+      path: 'user',
+      select: 'name email',
+    });
+  } else {
+    query = await Product.find().populate({
+      path: 'user',
+      select: 'name email',
+    });
+  }
+  res.status(200).json(query);
 };
+
 const getProduct = async (req: Request, res: Response) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id).populate({
+    path: 'user',
+    select: 'name email',
+  });
+  if (!product) {
+    throw new BadRequestError('Product was not found');
+  }
+
   res.status(200).json(product);
 };
 
 const createProduct = async (req: Request, res: Response) => {
   const { userId } = req.params;
-  const product = new Product(req.body);
-  const result = await product.save();
-  await User.findByIdAndUpdate(userId, {
-    $push: { products: product._id },
-  });
-  res.status(201).json(result);
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new BadRequestError('User was not found');
+  }
+  const product = await Product.create({ ...req.body, user: userId });
+
+  res.status(201).json(product);
 };
 
 const updateProduct = async (req: Request, res: Response) => {
+  const exist = await Product.findById(req.params.id);
+  if (!exist) {
+    throw new BadRequestError('Product was not found');
+  }
   const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
+
   res.status(200).json(product);
 };
 
 const deleteProduct = async (req: Request, res: Response) => {
-  const product = await Product.findByIdAndDelete(req.params.id);
-  await User.findByIdAndUpdate(req.params.userId, {
-    $pull: { products: product?._id },
-  });
-  res.status(200).json(product);
+  const product = await Product.findById(req.params.id);
+  if (!product) {
+    throw new BadRequestError('Product was not found');
+  }
+  await product.remove();
+
+  res.status(200).json({ message: 'Product was deleted' });
 };
 
 export { getProducts, getProduct, createProduct, updateProduct, deleteProduct };

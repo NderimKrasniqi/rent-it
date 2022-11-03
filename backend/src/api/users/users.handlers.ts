@@ -3,7 +3,7 @@ import { BadRequestError } from '../../errors/bad-request-error';
 import { User } from '../users/users.model';
 
 const getUser = async (req: Request, res: Response) => {
-  const user = await User.findById(req.params.userId);
+  const user = await User.findById(req.params.userId).populate('products');
   if (!user) {
     throw new BadRequestError('User was not found');
   }
@@ -22,7 +22,7 @@ const updateUser = async (req: Request, res: Response) => {
 };
 
 const deleteUser = async (req: Request, res: Response) => {
-  const user = await User.findByIdAndDelete(req.params.userId);
+  const user = await User.findById(req.params.userId);
   if (!user) {
     throw new BadRequestError('User was not found');
   }

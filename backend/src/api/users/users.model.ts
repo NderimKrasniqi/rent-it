@@ -7,7 +7,6 @@ import { createHash } from '../../utils/hash';
 interface IUserDocument extends Document {
   avatar?: string;
   name?: string;
-  products?: [Types.ObjectId];
   email: string;
   password: string;
 }
@@ -17,11 +16,10 @@ interface UserModel extends Model<IUserDocument> {
   insertOne(properties: UserInput): IUserDocument;
 }
 
-const userSchema = new Schema<IUserDocument>(
+const UserSchema = new Schema<IUserDocument>(
   {
     avatar: { type: String },
     name: { type: String },
-    products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
     email: {
       type: String,
       required: true,
@@ -33,6 +31,7 @@ const userSchema = new Schema<IUserDocument>(
   },
   {
     toJSON: {
+      virtuals: true,
       transform(doc, ret) {
         ret.id = ret._id;
         delete ret._id;
@@ -40,18 +39,35 @@ const userSchema = new Schema<IUserDocument>(
         delete ret.__v;
       },
     },
+    toObject: {
+      virtuals: true,
+    },
   }
 );
 
-userSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
     const hashed = await createHash(this.get('password'));
     this.set('password', hashed);
   }
   next();
 });
-userSchema.statics.insertOne = (properties: UserInput) => new User(properties);
 
-const User = model<IUserDocument, UserModel>('User', userSchema);
+UserSchema.pre('remove', async function (next) {
+  console.log('Products where removed');
+  await this.$model('Product').deleteMany({ user: this._id });
+  next();
+});
+
+UserSchema.virtual('products', {
+  ref: 'Product',
+  localField: '_id',
+  foreignField: 'user',
+  justOne: false,
+});
+
+UserSchema.statics.insertOne = (properties: UserInput) => new User(properties);
+
+const User = model<IUserDocument, UserModel>('User', UserSchema);
 
 export { User, UserInput, IUserDocument };

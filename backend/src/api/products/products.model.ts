@@ -1,4 +1,4 @@
-import { model, Schema, Document } from 'mongoose';
+import { model, Schema, Document, Types } from 'mongoose';
 
 export interface IProductDocument extends Document {
   image: string;
@@ -6,6 +6,7 @@ export interface IProductDocument extends Document {
   price: string;
   city: string;
   createdAt: Date;
+  user: Types.ObjectId;
 }
 const productSchema = new Schema<IProductDocument>(
   {
@@ -14,6 +15,7 @@ const productSchema = new Schema<IProductDocument>(
     price: { type: String },
     city: { type: String },
     createdAt: { type: Date, default: Date.now },
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   },
   {
     toJSON: {
