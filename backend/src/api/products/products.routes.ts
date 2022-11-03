@@ -12,16 +12,14 @@ import {
 } from './products.handles';
 
 const router = express.Router({ mergeParams: true });
+const middlewares = [requireAuth, validate({ params: productParam })];
 
-router
-  .route('/')
-  .get(getProducts)
-  .post(requireAuth, validate({ params: productParam }), createProduct);
+router.route('/').get(getProducts).post(middlewares, createProduct);
 
 router
   .route('/:id')
-  .get([validate({ params: productParam }), requireAuth], getProduct)
-  .put([validate({ params: productParam }), requireAuth], updateProduct)
-  .delete([validate({ params: productParam }), requireAuth], deleteProduct);
+  .get(middlewares, getProduct)
+  .put(middlewares, updateProduct)
+  .delete(middlewares, deleteProduct);
 
 export default router;
