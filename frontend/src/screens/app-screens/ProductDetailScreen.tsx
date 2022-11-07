@@ -1,12 +1,7 @@
 import { View, Text } from 'react-native';
 import React from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
-import { FeedStackParamsList } from '../../navigator/FeedNavigator';
+import { ProductDetailScreenProps } from '../AppNavigator.types';
 
-type ProductDetailScreenProps = StackScreenProps<
-  FeedStackParamsList,
-  'ProductDetailScreen'
->;
 const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
   const { item } = route.params;
   return (

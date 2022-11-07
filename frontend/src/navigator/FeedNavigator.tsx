@@ -13,19 +13,14 @@ export type FeedStackParamsList = {
 };
 const Stack = createStackNavigator<FeedStackParamsList>();
 
-const FeedStack = () => {
+const FeedNavigator = () => {
   const { width } = useWindowDimensions();
   return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false, gestureResponseDistance: width / 2 }}
-    >
+    <Stack.Navigator screenOptions={{ headerShown: false, gestureResponseDistance: width / 2 }}>
       <Stack.Screen name="ProductFeedScreen" component={ProductFeedScreen} />
-      <Stack.Screen
-        name="ProductDetailScreen"
-        component={ProductDetailScreen}
-      />
+      <Stack.Screen name="ProductDetailScreen" component={ProductDetailScreen} />
     </Stack.Navigator>
   );
 };
 
-export default FeedStack;
+export default FeedNavigator;

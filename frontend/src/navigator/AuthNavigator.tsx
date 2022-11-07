@@ -5,13 +5,13 @@ import LoginScreen from '../screens/auth-screens/LoginScreen';
 import RegisterScreen from '../screens/auth-screens/RegisterScreen';
 import WelcomeScreen from '../screens/auth-screens/WelcomeScreen';
 
-const Stack = createStackNavigator<AuthParamList>();
-
-export type AuthParamList = {
+export type AuthStackParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
   RegisterScreen: undefined;
 };
+
+const Stack = createStackNavigator<AuthStackParamList>();
 
 const AuthNavigator = () => {
   const { width } = useWindowDimensions();
@@ -25,8 +25,8 @@ const AuthNavigator = () => {
     >
       <Stack.Screen
         name="WelcomeScreen"
-        component={WelcomeScreen}
         options={{ headerShown: false }}
+        component={WelcomeScreen}
       />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />

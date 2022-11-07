@@ -9,11 +9,8 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
     throw new NotAuthorizedError();
   }
   try {
-    const decodedToken = jwt.verify(token, process.env.JWT_KEY!) as IDecodedToken;
-    const { data } = decodedToken;
-    if (req.params.userId && req.params.userId !== data.id) {
-      throw new NotAuthorizedError();
-    }
+    const decodedToken = jwt.verify(token, process.env.SECRET_JWT!);
+    next();
   } catch (err) {
     throw new NotAuthorizedError();
   }

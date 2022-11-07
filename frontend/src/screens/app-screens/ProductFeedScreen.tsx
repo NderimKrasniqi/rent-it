@@ -1,15 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
+import { FlatList } from 'react-native';
 import AppCard from '../../components/AppCard';
 import AppScreen from '../../components/AppScreen';
 import { CardData, cardData } from '../../utils/cardData';
-import { FlatList } from 'react-native-gesture-handler';
-import { FeedStackParamsList } from '../../navigator/FeedNavigator';
-import { StackScreenProps } from '@react-navigation/stack';
-
-type ProductFeedScreenProps = StackScreenProps<
-  FeedStackParamsList,
-  'ProductFeedScreen'
->;
+import { ProductFeedScreenProps } from '../AppNavigator.types';
 
 const ProductFeedScreen = ({ navigation }: ProductFeedScreenProps) => {
   return (
@@ -17,10 +11,7 @@ const ProductFeedScreen = ({ navigation }: ProductFeedScreenProps) => {
       <FlatList<CardData>
         data={cardData}
         renderItem={({ item }) => (
-          <AppCard
-            {...item}
-            onPress={() => navigation.navigate('ProductDetailScreen', { item })}
-          />
+          <AppCard {...item} onPress={() => navigation.navigate('ProductDetailScreen', { item })} />
         )}
         initialNumToRender={3}
         keyExtractor={(item) => item.id.toString()}

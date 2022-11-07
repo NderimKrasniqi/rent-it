@@ -1,14 +1,16 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AccountScreen from '../screens/app-screens/AccountScreen';
+import AccountScreen from '../screens/account-screens/AccountScreen';
 import ProductEditScreen from '../screens/app-screens/ProductEditScreen';
 import FeedNavigator from './FeedNavigator';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import TabBarButton from './TabBarButton';
+import AccountNavigator, { AccountStackParamsList } from './AccountNavigator';
+import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type TabParamList = {
   FeedNavigator: undefined;
   ProductEditScreen: undefined;
-  AccountScreen: undefined;
+  AccountNavigator: NavigatorScreenParams<AccountStackParamsList>;
 };
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -37,16 +39,14 @@ const AppNavigator = () => {
         component={ProductEditScreen}
         options={({ navigation }) => ({
           tabBarButton: () => (
-            <TabBarButton
-              onPress={() => navigation.navigate('ProductEditScreen')}
-            />
+            <TabBarButton onPress={() => navigation.navigate('ProductEditScreen')} />
           ),
         })}
       />
 
       <Tab.Screen
-        name="AccountScreen"
-        component={AccountScreen}
+        name="AccountNavigator"
+        component={AccountNavigator}
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialCommunityIcons name="account" size={size} color={color} />

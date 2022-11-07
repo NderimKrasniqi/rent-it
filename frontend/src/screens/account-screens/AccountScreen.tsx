@@ -1,4 +1,3 @@
-import { StackScreenProps } from '@react-navigation/stack';
 import React, { useContext } from 'react';
 import { FlatList, View, Text } from 'react-native';
 import AuthContext from '../../auth/context';
@@ -9,8 +8,9 @@ import AppListItem from '../../components/AppListItem';
 import AppView from '../../components/AppScreen';
 import { useUser } from '../../hooks/useUser';
 import { AccountListData, listData } from '../../utils/accountListData';
+import { AccountScreenProps } from '../AppNavigator.types';
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }: AccountScreenProps) => {
   const { data, error, isError } = useUser();
   const { setUser } = useContext(AuthContext);
   const handleLogOut = async () => {
@@ -25,22 +25,18 @@ const AccountScreen = () => {
       <View className="flex h-3/5 mb-6">
         <FlatList<AccountListData>
           data={listData}
+          keyExtractor={(item) => item.id.toString()}
+          scrollEnabled={false}
           renderItem={({ item }) => (
             <AppListItem
               icon={item.icon}
               title={item.title}
               bgColor={item.bgColor}
-              onPress={() => console.log('Hello')}
+              onPress={() => navigation.navigate(item.screenName as any)}
             />
           )}
-          keyExtractor={(item) => item.id.toString()}
-          scrollEnabled={false}
         />
-        <AppButton
-          title="Log Out"
-          color="bg-primary-500"
-          onPress={handleLogOut}
-        />
+        <AppButton title="Log Out" color="bg-primary-500" onPress={handleLogOut} />
       </View>
     </AppView>
   );
