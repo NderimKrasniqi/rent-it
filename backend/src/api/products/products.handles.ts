@@ -1,6 +1,6 @@
 import { User } from '../users/users.model';
 import { Response, Request } from 'express';
-import Product from './products.model';
+import { Product } from './products.model';
 import { BadRequestError } from '../../errors/bad-request-error';
 
 const getProducts = async (req: Request, res: Response) => {
@@ -35,11 +35,15 @@ const getProduct = async (req: Request, res: Response) => {
 
 const createProduct = async (req: Request, res: Response) => {
   const { userId } = req.params;
+
   const user = await User.findById(userId);
+
   if (!user) {
     throw new BadRequestError('User was not found');
   }
-  const product = await Product.create({ ...req.body, user: userId });
+  const product = Product.insertOne({ ...req.body, user: userId });
+
+  await product.save();
 
   res.status(201).json(product);
 };
@@ -49,6 +53,7 @@ const updateProduct = async (req: Request, res: Response) => {
   if (!exist) {
     throw new BadRequestError('Product was not found');
   }
+  exist.set(req.body);
   const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });

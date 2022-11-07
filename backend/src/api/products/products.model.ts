@@ -1,23 +1,28 @@
-import { model, Schema, Document, Types } from 'mongoose';
+import { model, Schema, Document, Types, Model } from 'mongoose';
+import { ProductInput } from './product.validate';
 
-export interface IProductDocument extends Document {
+interface IProductDocument extends Document {
   image: string;
   title: string;
   price: string;
   city: string;
-  createdAt: Date;
   user: Types.ObjectId;
 }
-const productSchema = new Schema<IProductDocument>(
+
+interface ProductModel extends Model<IProductDocument> {
+  insertOne(properties: ProductInput): IProductDocument;
+}
+
+const ProductSchema = new Schema<IProductDocument>(
   {
     image: { type: String },
     title: { type: String },
     price: { type: String },
     city: { type: String },
-    createdAt: { type: Date, default: Date.now },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   },
   {
+    timestamps: true,
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;
@@ -28,4 +33,8 @@ const productSchema = new Schema<IProductDocument>(
   }
 );
 
-export default model('Product', productSchema);
+ProductSchema.statics.insertOne = (args: ProductInput) => new Product(args);
+
+const Product = model<IProductDocument, ProductModel>('Product', ProductSchema);
+
+export { Product, IProductDocument };

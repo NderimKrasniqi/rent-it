@@ -2,7 +2,7 @@ import express from 'express';
 import validate from '../../middleware/request-validator';
 import { requireAuth } from '../../middleware/require-auth';
 import { userParam } from '../users/users.validate';
-import { product, productParam } from './product.validation';
+import { Product, productParam, ProductPartial } from './product.validate';
 import {
   getProducts,
   createProduct,
@@ -14,12 +14,15 @@ import {
 const router = express.Router({ mergeParams: true });
 const middlewares = [requireAuth, validate({ params: productParam })];
 
-router.route('/').get(getProducts).post(middlewares, createProduct);
+router
+  .route('/')
+  .get(getProducts)
+  .post([requireAuth, validate({ params: userParam, body: Product })], createProduct);
 
 router
   .route('/:id')
   .get(middlewares, getProduct)
-  .put(middlewares, updateProduct)
+  .put([requireAuth, validate({ params: productParam, body: ProductPartial })], updateProduct)
   .delete(middlewares, deleteProduct);
 
 export default router;

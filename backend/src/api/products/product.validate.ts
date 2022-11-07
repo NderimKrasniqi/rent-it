@@ -1,7 +1,7 @@
-import { ObjectId, isValidObjectId } from 'mongoose';
+import { isValidObjectId } from 'mongoose';
 import * as z from 'zod';
 
-const product = z.object({
+const Product = z.object({
   image: z.string({
     required_error: 'Image is required',
   }),
@@ -25,6 +25,8 @@ const productParam = z.object({
   }),
 });
 
-type ProductInput = z.infer<typeof product>;
+const ProductPartial = Product.partial();
 
-export { product, productParam, ProductInput };
+type ProductInput = z.infer<typeof Product>;
+
+export { Product, ProductPartial, productParam, ProductInput };

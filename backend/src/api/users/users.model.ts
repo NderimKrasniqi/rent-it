@@ -1,5 +1,5 @@
-import { Model, model, Schema, Document, Types } from 'mongoose';
-import { UserInput } from '../auth/auth.validation';
+import { Model, model, Schema, Document } from 'mongoose';
+import { UserInput } from './users.validate';
 import { createHash } from '../../utils/hash';
 
 // An interface that describes the properties
@@ -66,8 +66,8 @@ UserSchema.virtual('products', {
   justOne: false,
 });
 
-UserSchema.statics.insertOne = (properties: UserInput) => new User(properties);
+UserSchema.statics.insertOne = (args: UserInput) => new User(args);
 
 const User = model<IUserDocument, UserModel>('User', UserSchema);
 
-export { User, UserInput, IUserDocument };
+export { User, IUserDocument };

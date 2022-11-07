@@ -1,6 +1,6 @@
 import express from 'express';
 import validate from '../../middleware/request-validator';
-import { authUser } from './auth.validation';
+import { LoginInput, RegisterInput } from './auth.validation';
 import { register, login } from './auth.handlers';
 
 const router = express.Router();
@@ -8,7 +8,7 @@ const router = express.Router();
 router.post(
   '/register',
   validate({
-    body: authUser,
+    body: RegisterInput,
   }),
   register
 );
@@ -16,7 +16,7 @@ router.post(
 router.post(
   '/login',
   validate({
-    body: authUser,
+    body: LoginInput,
   }),
   login
 );

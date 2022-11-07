@@ -9,6 +9,6 @@ export class NotAuthorizedError extends CustomError {
   }
 
   serializeErrors() {
-    return [{ message: 'Not authorized' }];
+    return [{ message: "You don't have permission to access this resource" }];
   }
 }
