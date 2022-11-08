@@ -8,7 +8,7 @@ import AppListItem from '../../components/AppListItem';
 import AppView from '../../components/AppScreen';
 import { useUser } from '../../hooks/useUser';
 import { AccountListData, listData } from '../../utils/accountListData';
-import { AccountScreenProps } from '../AppNavigator.types';
+import { AccountScreenProps } from '../../navigation/navigation.types';
 
 const AccountScreen = ({ navigation }: AccountScreenProps) => {
   const { data, error, isError } = useUser();

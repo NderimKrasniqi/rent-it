@@ -5,7 +5,7 @@ import AccountScreen from '../screens/account-screens/AccountScreen';
 import ProductListScreen from '../screens/account-screens/ProductListScreen';
 import MessageListScreen from '../screens/account-screens/MessageListScreen';
 import ProfileScreen from '../screens/account-screens/ProfileScreen';
-import { AccountStackParamsList } from '../screens/AppNavigator.types';
+import { AccountStackParamsList } from './navigation.types';
 
 const Stack = createStackNavigator<AccountStackParamsList>();
 

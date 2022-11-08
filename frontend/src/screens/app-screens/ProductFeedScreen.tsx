@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import AppCard from '../../components/AppCard';
 import AppScreen from '../../components/AppScreen';
 import { CardData, cardData } from '../../utils/cardData';
-import { ProductFeedScreenProps } from '../AppNavigator.types';
+import { ProductFeedScreenProps } from '../../navigation/navigation.types';
 
 const ProductFeedScreen = ({ navigation }: ProductFeedScreenProps) => {
   return (

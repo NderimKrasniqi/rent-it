@@ -3,9 +3,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import LottieView from 'lottie-react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AuthContext from './src/auth/context';
-import AuthNavigator from './src/navigator/AuthNavigator';
-import AppNavigator from './src/navigator/AppNavigator';
-import { myTheme } from './src/navigator/navigationTheme';
+import AuthNavigator from './src/navigation/AuthNavigator';
+import AppNavigator from './src/navigation/AppNavigator';
+import { myTheme } from './src/navigation/navigationTheme';
 import { useResources } from './src/hooks/useResources';
 
 SplashScreen.preventAutoHideAsync();

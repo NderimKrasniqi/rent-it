@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import React from 'react';
-import { ProductDetailScreenProps } from '../AppNavigator.types';
+import { ProductDetailScreenProps } from '../../navigation/navigation.types';
 
 const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
   const { item } = route.params;

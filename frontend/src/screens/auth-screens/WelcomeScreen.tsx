@@ -4,7 +4,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import colors from '../../utils/colors';
 import AppLogo from '../../components/AppLogo';
 import AppButton from '../../components/AppButton';
-import { AuthStackParamList } from '../../navigator/AuthNavigator';
+import { AuthStackParamList } from '../../navigation/AuthNavigator';
 
 type Props = StackScreenProps<AuthStackParamList, 'WelcomeScreen'>;
 
