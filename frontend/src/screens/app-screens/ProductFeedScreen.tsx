@@ -3,9 +3,9 @@ import { FlatList } from 'react-native';
 import AppCard from '../../components/AppCard';
 import AppScreen from '../../components/AppScreen';
 import { CardData, cardData } from '../../utils/cardData';
-import { ProductFeedScreenProps } from '../../navigation/navigation.types';
+import { FeedStackProps } from '../../navigation/navigation.types';
 
-const ProductFeedScreen = ({ navigation }: ProductFeedScreenProps) => {
+const ProductFeedScreen = ({ navigation }: FeedStackProps<'ProductFeedScreen'>) => {
   return (
     <AppScreen className="flex-1 bg-light justify-center px-5">
       <FlatList<CardData>

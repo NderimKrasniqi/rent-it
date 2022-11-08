@@ -3,14 +3,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import ProductFeedScreen from '../screens/app-screens/ProductFeedScreen';
 import ProductDetailScreen from '../screens/app-screens/ProductDetailScreen';
-import { CardData } from '../utils/cardData';
+import { FeedStackParamsList } from './navigation.types';
 
-export type FeedStackParamsList = {
-  ProductFeedScreen: undefined;
-  ProductDetailScreen: {
-    item: CardData;
-  };
-};
 const Stack = createStackNavigator<FeedStackParamsList>();
 
 const FeedNavigator = () => {

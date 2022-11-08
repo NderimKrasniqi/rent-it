@@ -9,6 +9,32 @@ export type TabParamList = {
   AccountNavigator: NavigatorScreenParams<AccountStackParamsList>;
 };
 
+export type RootStackScreenProps<T extends keyof TabParamList> = BottomTabScreenProps<
+  TabParamList,
+  T
+>;
+
+export type FeedStackProps<T extends keyof FeedStackParamsList> = CompositeScreenProps<
+  StackScreenProps<FeedStackParamsList, T>,
+  RootStackScreenProps<keyof TabParamList>
+>;
+
+export type AccountStackProps<T extends keyof AccountStackParamsList> = CompositeScreenProps<
+  StackScreenProps<AccountStackParamsList, T>,
+  RootStackScreenProps<keyof TabParamList>
+>;
+
+export type AuthStackScreenProps<T extends keyof AuthStackParamList> = StackScreenProps<
+  AuthStackParamList,
+  T
+>;
+
+export type AuthStackParamList = {
+  WelcomeScreen: undefined;
+  LoginScreen: undefined;
+  RegisterScreen: undefined;
+};
+
 export type AccountStackParamsList = {
   AccountScreen: undefined;
   ProductListScreen: undefined;
@@ -22,17 +48,3 @@ export type FeedStackParamsList = {
     item: CardData;
   };
 };
-
-export type AccountScreenProps = CompositeScreenProps<
-  StackScreenProps<AccountStackParamsList, 'AccountScreen'>,
-  BottomTabScreenProps<TabParamList>
->;
-
-export type ProductListScreenProps = CompositeScreenProps<
-  StackScreenProps<AccountStackParamsList, 'ProductListScreen'>,
-  BottomTabScreenProps<TabParamList>
->;
-
-export type ProductDetailScreenProps = StackScreenProps<FeedStackParamsList, 'ProductDetailScreen'>;
-
-export type ProductFeedScreenProps = StackScreenProps<FeedStackParamsList, 'ProductFeedScreen'>;

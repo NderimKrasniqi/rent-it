@@ -1,14 +1,11 @@
 import { ImageBackground, View } from 'react-native';
 import React from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
 import colors from '../../utils/colors';
 import AppLogo from '../../components/AppLogo';
 import AppButton from '../../components/AppButton';
-import { AuthStackParamList } from '../../navigation/AuthNavigator';
+import { AuthStackScreenProps } from '../../navigation/navigation.types';
 
-type Props = StackScreenProps<AuthStackParamList, 'WelcomeScreen'>;
-
-const WelcomeScreen = ({ route, navigation }: Props) => {
+const WelcomeScreen = ({ navigation }: AuthStackScreenProps<'WelcomeScreen'>) => {
   return (
     <ImageBackground
       source={require('../../assets/welcome.jpg')}

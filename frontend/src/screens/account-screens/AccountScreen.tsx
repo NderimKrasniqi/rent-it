@@ -8,9 +8,9 @@ import AppListItem from '../../components/AppListItem';
 import AppView from '../../components/AppScreen';
 import { useUser } from '../../hooks/useUser';
 import { AccountListData, listData } from '../../utils/accountListData';
-import { AccountScreenProps } from '../../navigation/navigation.types';
+import { AccountStackProps } from '../../navigation/navigation.types';
 
-const AccountScreen = ({ navigation }: AccountScreenProps) => {
+const AccountScreen = ({ navigation }: AccountStackProps<'AccountScreen'>) => {
   const { data, error, isError } = useUser();
   const { setUser } = useContext(AuthContext);
   const handleLogOut = async () => {

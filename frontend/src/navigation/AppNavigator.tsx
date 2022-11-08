@@ -4,14 +4,8 @@ import ProductEditScreen from '../screens/app-screens/ProductEditScreen';
 import FeedNavigator from './FeedNavigator';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import TabBarButton from './TabBarButton';
-import AccountNavigator, { AccountStackParamsList } from './AccountNavigator';
-import { NavigatorScreenParams } from '@react-navigation/native';
-
-export type TabParamList = {
-  FeedNavigator: undefined;
-  ProductEditScreen: undefined;
-  AccountNavigator: NavigatorScreenParams<AccountStackParamsList>;
-};
+import AccountNavigator from './AccountNavigator';
+import { TabParamList } from './navigation.types';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 

@@ -8,7 +8,7 @@ import AppRegisterText from '../../components/AppRegisterText';
 import AppScreen from '../../components/AppScreen';
 import AppFormInput from '../../components/AppFormInput';
 
-const RegisterScreen: React.FC = () => {
+const RegisterScreen = () => {
   const { control, handleSubmit, watch } = useForm();
   const { register, show, errors } = useAuth();
   const isPassword = watch('password');
@@ -20,9 +20,7 @@ const RegisterScreen: React.FC = () => {
   return (
     <AppScreen className="flex-1 justify-start items-center">
       <AppRegisterText />
-      <View className="h-14 w-full">
-        {show && <AppErrorMessage errors={errors} />}
-      </View>
+      <View className="h-14 w-full">{show && <AppErrorMessage errors={errors} />}</View>
       <AppFormInput
         icon="person-outline"
         name="name"

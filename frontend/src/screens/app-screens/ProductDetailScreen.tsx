@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native';
 import React from 'react';
-import { ProductDetailScreenProps } from '../../navigation/navigation.types';
+import { FeedStackProps } from '../../navigation/navigation.types';
 
-const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
+const ProductDetailScreen = ({ route }: FeedStackProps<'ProductDetailScreen'>) => {
   const { item } = route.params;
   return (
     <View className="flex-1 justify-center items-center">
